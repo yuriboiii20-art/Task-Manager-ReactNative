@@ -52,6 +52,8 @@ export function getContrastTextColor(backgroundColor: string): string {
 
     // Calculate the luminance of the color
     const luminance = 0.299 * r + 0.587 * g + 0.114 * b;
+
+    // Return black for bright colors and white for dark colors based on luminance
     return luminance > 186 ? "#000000" : "#FFFFFF";
   } catch {
     return "#000000";
