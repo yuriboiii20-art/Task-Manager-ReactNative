@@ -209,7 +209,7 @@ Then:
 ### Routing
 
 - **Automatic Redirection:** The root route ("/") automatically redirects to the home screen.
-- **Fallback:** Invalid routes are handled by the `+not-found` screen.
+- **Fallback:** Invalid routes are handled by the `+not-found` screen (though no such routes are present in the app - it's _technically_ impossible to get lost!).
 
 ---
 
@@ -256,6 +256,9 @@ Task-Manager-ReactNative
 │   └── CustomTabStyles.ts         # Custom styles for the tab bar and related UI components
 ├── types
 │   └── types.ts                   # TypeScript type definitions for the project
+├── assets
+│   ├── fonts                      # Custom fonts for the app (Roboto)
+│   └── images                     # Images used in the app
 └── shell                          # Shell scripts for common tasks
     ├── run-platform.sh            # Script to run the app on a specific platform
     ├── format.sh                  # Script to format the project code
