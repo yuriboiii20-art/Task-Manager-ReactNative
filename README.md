@@ -290,10 +290,10 @@ In the near future, if I have more time, I would love to implement the following
 - **Task Sharing:** Enable task sharing with other users.
 - **Task Search & Filtering:** Implement search and filter options for tasks.
 - **Task Priority:** Add priority levels for tasks.
-- **
+- **Enhanced Branding:** Improve the app's branding with a custom logo, color scheme, and typography, in line with the TaskNexus theme.
 
 These features would make TaskNexus similar to another app of mine, [CollabNote](https://github.com/hoangsonww/CollabNote-Fullstack-App),
-which is a full-stack web application for collaborative note-taking with user authentication, real-time updates, and more.
+which is a full-stack web application for collaborative note-taking with user authentication, real-time updates, and more, but in a mobile app format.
 
 ## License
 
