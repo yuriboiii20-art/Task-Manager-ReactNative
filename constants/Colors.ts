@@ -36,6 +36,7 @@ export function getContrastTextColor(backgroundColor: string): string {
       return "#000000";
     }
 
+    // Convert hex to RGB value
     const r = parseInt(
       hex.length === 3 ? hex[0] + hex[0] : hex.substring(0, 2),
       16,
@@ -49,6 +50,7 @@ export function getContrastTextColor(backgroundColor: string): string {
       16,
     );
 
+    // Calculate the luminance of the color
     const luminance = 0.299 * r + 0.587 * g + 0.114 * b;
     return luminance > 186 ? "#000000" : "#FFFFFF";
   } catch {
