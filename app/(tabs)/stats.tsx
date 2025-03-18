@@ -1,5 +1,5 @@
-import React, { useContext, useEffect, useRef } from "react";
-import { View, Dimensions, ScrollView } from "react-native";
+import React, { useContext, useEffect } from "react";
+import { View, Dimensions, ScrollView, Platform } from "react-native";
 import { Text, Card, useTheme } from "react-native-paper";
 import Chart from "../../components/Chart";
 import { TaskContext } from "../../contexts/TaskContext";
@@ -101,7 +101,8 @@ export default function StatsScreen() {
   const screenWidth = Dimensions.get("window").width * 0.85; // 85% of screen width to fit nicely
   const chartHeight = 220;
 
-  // Chart config forcing transparent backgrounds.
+  // Chart config forcing transparent backgrounds and specifying a custom font for labels on web,
+  // as well as other customizations for the charts
   const chartConfig = {
     backgroundColor: "transparent",
     backgroundGradientFrom: "transparent",
@@ -112,7 +113,10 @@ export default function StatsScreen() {
     labelColor: (opacity = 1) => colors.onBackground,
     barPercentage: 1,
     decimalPlaces: 0,
-    propsForLabels: { fontSize: 12 },
+    propsForLabels: {
+      fontSize: 12,
+      fontFamily: Platform.OS === "web" ? "Arial" : "System",
+    },
     propsForBackgroundLines: {
       stroke: colors.onBackground,
       strokeOpacity: 0,
@@ -183,6 +187,7 @@ export default function StatsScreen() {
                   color: d.color,
                   legendFontColor: colors.onBackground,
                   legendFontSize: 14,
+                  legendFontFamily: Platform.OS === "web" ? "Arial" : "System", // Custom font for web
                 }))}
                 width={screenWidth}
                 height={chartHeight}

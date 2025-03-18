@@ -44,6 +44,23 @@ const PRESET_COLORS = [
 ];
 
 /**
+ * ContentWrapper component conditionally wraps children in TouchableWithoutFeedback on mobile,
+ * or a plain View on web. This is to dismiss the keyboard when tapping outside of an input field.
+ */
+const ContentWrapper: React.FC<{ children: React.ReactNode }> = ({
+  children,
+}) => {
+  if (Platform.OS === "web") {
+    return <View>{children}</View>;
+  }
+  return (
+    <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
+      {children}
+    </TouchableWithoutFeedback>
+  );
+};
+
+/**
  * TaskAddModal component is a modal that allows the user to add a new task.
  *
  * @param visible - Whether the modal is visible.
@@ -108,7 +125,7 @@ export default function TaskAddModal({ visible, onClose, onAdd }: Props) {
           { backgroundColor: colors.surface },
         ]}
       >
-        <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
+        <ContentWrapper>
           <View>
             <Text
               variant="titleLarge"
@@ -191,7 +208,7 @@ export default function TaskAddModal({ visible, onClose, onAdd }: Props) {
               </Button>
             </View>
           </View>
-        </TouchableWithoutFeedback>
+        </ContentWrapper>
       </Modal>
     </Portal>
   );

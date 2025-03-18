@@ -17,7 +17,7 @@
 - [Overview](#overview)
   - [iOS](#ios)
   - [Android](#android)
-  - [Modals](#modals)
+  - [Web](#web)
   - [Screen Recordings](#screen-recordings)
 - [Features](#features)
 - [Technical Stack](#technical-stack)
@@ -68,6 +68,12 @@ It also features dark/light theme toggling with smooth transitions and a custom 
   <img src="img/AddModalDark.png" width="22%">
   <img src="img/EditModal.png" width="22%">
   <img src="img/EditModalDark.png" width="22%">
+</p>
+
+### Web
+
+<p align="center">
+  <img src="img/Web.png" width="80%">
 </p>
 
 ### Screen Recordings
@@ -174,7 +180,7 @@ Then:
 
 - Open the app on your device using the Expo Go app, or
 - Use an Android/iOS simulator (remember to press `a` or `i` in the terminal to open the app on Android/iOS, respectively), or
-- Open the project in a web browser for a quick preview (remember to press `w` in the terminal).
+- Open the project in a web browser for a quick preview (remember to press `w` in the terminal, it will then open a new tab in your default browser).
 
 ---
 
@@ -256,7 +262,6 @@ Task-Manager-ReactNative
     ├── start.sh                   # Script to start the app
     ├── reset.sh                   # Script to reset the project state
     └── update.sh                  # Script to update project dependencies
-
 ```
 
 ## Scripts & Tools
