@@ -15,6 +15,7 @@
 ## Table of Contents
 
 - [Overview](#overview)
+  - [TaskNexus Branding](#tasknexus-branding)
   - [iOS](#ios)
   - [Android](#android)
   - [Web](#web)
@@ -29,6 +30,7 @@
 - [Usage Instructions](#usage-instructions)
 - [File Structure](#file-structure)
 - [Scripts & Tools](#scripts--tools)
+- [Future Enhancements](#future-enhancements)
 - [License](#license)
 - [Contact](#contact)
 
@@ -107,6 +109,7 @@ I hope its name and branding convey a sense of connectivity and organization, wi
 ### Theme & UI
 
 - **Dark/Light Mode Toggle:** Switch between dark and light themes with a toggle integrated into the custom bottom tab bar.
+  - Automatically detects the system theme (light/dark) and adjusts the app theme accordingly on startup.
 - **Smooth Transitions:** Animated transitions (200ms) for background and UI elements when changing themes.
 - **Consistent Material Design:** Built with React Native Paper, ensuring a uniform look and feel across all screens.
 
@@ -130,7 +133,11 @@ I hope its name and branding convey a sense of connectivity and organization, wi
 - **React Native Paper:** Offers Material Design components and theming.
 - **React Native Chart Kit:** Renders customizable charts (pie, bar, line).
 - **Reanimated:** Powers smooth and performant UI animations.
-- **ESLint & Prettier:** Maintains code quality and consistent formatting.
+- **Prettier:** Maintains code quality and consistent formatting.
+- **JSDoc & TypeScript Definitions:** Documented code for better understanding and type safety.
+- **Custom Fonts & Images:** Includes custom fonts (Roboto) and images for branding.
+- **Shell Scripts:** Simplify common tasks with custom shell scripts.
+- and more...
 
 ## Installation & Setup
 
@@ -298,7 +305,7 @@ In the near future, if I have more time, I would love to implement the following
 - **Task Priority:** Add priority levels for tasks.
 - **Enhanced Branding:** Improve the app's branding with a custom logo, color scheme, and typography, in line with the TaskNexus theme.
 
-These features would make TaskNexus similar to another app of mine - [CollabNote](https://github.com/hoangsonww/CollabNote-Fullstack-App), 
+These features would make TaskNexus similar to another app of mine - [CollabNote](https://github.com/hoangsonww/CollabNote-Fullstack-App),
 which is a full-stack web application for collaborative note-taking with user authentication, real-time updates, and more - but in a mobile app format.
 
 ## License
