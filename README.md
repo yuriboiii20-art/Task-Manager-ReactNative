@@ -215,6 +215,8 @@ Task-Manager-ReactNative
 ├── package.json                   # Project dependencies and scripts
 ├── tsconfig.json                  # TypeScript configuration file
 ├── .gitignore                     # Git ignore file
+├── Dockerfile                     # Dockerfile for containerization
+├── docker-compose.yml             # Docker Compose file for containerization
 ├── app
 │   ├── _layout.tsx                # Main layout with theme, navigation, and context providers
 │   ├── index.tsx                  # Flash screen and redirection to home screen
@@ -246,15 +248,27 @@ Task-Manager-ReactNative
 │   ├── TaskItemStyles.ts          # Custom styles for individual task items
 │   ├── NotFoundStyles.ts          # Custom styles for the Not Found screen
 │   └── CustomTabStyles.ts         # Custom styles for the tab bar and related UI components
-└── types
-    └── types.ts                   # TypeScript type definitions for the project
+├── types
+│   └── types.ts                   # TypeScript type definitions for the project
+└── shell                          # Shell scripts for common tasks
+    ├── run-platform.sh            # Script to run the app on a specific platform
+    ├── format.sh                  # Script to format the project code
+    ├── start.sh                   # Script to start the app
+    ├── reset.sh                   # Script to reset the project state
+    └── update.sh                  # Script to update project dependencies
+
 ```
 
 ## Scripts & Tools
 
 - **reset-project.js:** Located in the `scripts` folder, this script resets the project state as needed.
 - **Prettier:** Integrated to maintain code quality and consistent formatting.
+  - Use by simply running `npm run format` or `yarn format` to format the entire project.
 - **Documented Code:** Includes JSDoc comments for functions and TypeScript type definitions for better code understanding.
+- **Shell Scripts**: Several shell scripts are included to simplify common tasks, such as starting the app, resetting the project, and updating dependencies. Feel free to use them for easier project management!
+  - Use the script by first running `chmod +x <script-name>.sh` to make it executable, then run `./<script-name>.sh` to execute it.
+- **Dockerfile (Optional)**: A Dockerfile is provided to containerize the app if needed. However, since mobile testing requires physical devices or emulators, the Dockerfile is designed only for the web version of the app.
+  - Use the Docker Compose file (`docker-compose.yml`) to build and run the Docker container, by running `docker-compose up --build`. Ensure that Docker is installed and running on your system.
 
 ## License
 
