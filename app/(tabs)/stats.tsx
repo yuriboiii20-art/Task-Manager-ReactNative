@@ -28,7 +28,7 @@ export default function StatsScreen() {
   const { tasks } = useContext(TaskContext);
   const { colors } = useTheme();
 
-  // Animate background transitions when colors.background changes
+  // Animate background transitions when colors.background changes for a smoother UX
   // Apply a fade-in effect to the background color, duration 200ms
   const prevBackground = usePrevious(colors.background) || colors.background;
   const progress = useSharedValue(1);
