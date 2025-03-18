@@ -17,12 +17,14 @@ export const styles = StyleSheet.create({
     marginBottom: 16,
   },
   heading: {
+    fontFamily: "Roboto-Bold",
     fontSize: 28,
     fontWeight: "800",
     letterSpacing: 1.2,
     marginBottom: 6,
   },
   subheading: {
+    fontFamily: "Roboto-Regular",
     fontSize: 16,
     opacity: 0.7,
   },

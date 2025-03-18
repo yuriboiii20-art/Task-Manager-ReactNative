@@ -17,8 +17,7 @@ import usePrevious from "../hooks/usePrevious";
 
 /**
  * CustomTabBar component serves as the custom bottom tab bar for the application,
- * @param props
- * @constructor
+ * @param props - BottomTabBarProps from @react-navigation/bottom-tabs
  */
 export default function CustomTabBar(props: BottomTabBarProps) {
   const { state, navigation } = props;
@@ -53,6 +52,7 @@ export default function CustomTabBar(props: BottomTabBarProps) {
     setColorSchemeOverride(colorSchemeOverride === "dark" ? "light" : "dark");
   };
 
+  // Render tab button
   const renderTab = (
     routeName: string,
     iconName: keyof typeof Ionicons.glyphMap,
@@ -76,6 +76,7 @@ export default function CustomTabBar(props: BottomTabBarProps) {
     );
   };
 
+  // Render the custom tab bar with animated background color and the buttons
   return (
     <Animated.View style={[styles.container, animatedStyle]}>
       {renderTab("home", "home", 0)}

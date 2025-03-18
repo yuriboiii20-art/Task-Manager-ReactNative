@@ -13,13 +13,16 @@ export const styles = StyleSheet.create({
     alignItems: "center",
   },
   title: {
+    fontFamily: "Roboto-Bold",
     fontSize: 22,
     marginBottom: 8,
   },
   subtext: {
+    fontFamily: "Roboto-Regular",
     marginBottom: 12,
   },
   link: {
+    fontFamily: "Roboto-Regular",
     fontSize: 16,
     color: "#6200EE",
   },

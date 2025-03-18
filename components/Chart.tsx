@@ -58,6 +58,40 @@ export type ChartProps =
   | LineChartCustomProps;
 
 /**
+ * Helper function to sample data for line charts to ensure that there are at most maxPoints data points.
+ * Skip some data points to avoid overlapping labels, if there are more than maxPoints (5 by default).
+ *
+ * @param data - The data object for the line chart.
+ * @param maxPoints - The maximum number of data points to display.
+ * @returns The sampled data object.
+ */
+const sampleLineChartData = (data: any, maxPoints: number = 5) => {
+  if (!data || !data.labels || data.labels.length <= maxPoints) {
+    return data;
+  }
+
+  // Sample the data to ensure that we have at most maxPoints data points
+  const { labels, datasets } = data;
+  const step = Math.ceil(labels.length / maxPoints);
+
+  // Filter the labels based on the step size (so that we have at most maxPoints labels on the chart)
+  const newLabels = labels.filter(
+    (_: any, index: number) => index % step === 0,
+  );
+
+  // Filter the data points based on the step size (so that we have at most maxPoints data points on the chart)
+  const newDatasets = datasets.map((dataset: any) => ({
+    ...dataset,
+    data: dataset.data.filter((_: any, index: number) => index % step === 0),
+  }));
+
+  return {
+    labels: newLabels,
+    datasets: newDatasets,
+  };
+};
+
+/**
  * Chart component that renders a pie, bar, or line chart based on the type prop.
  *
  * @param props - The props for the chart component.
@@ -106,6 +140,10 @@ const Chart: React.FC<ChartProps> = (props) => {
     case "line": {
       const { fromZero, bezier, withInnerLines, ...otherProps } =
         rest as LineChartCustomProps;
+      // Ensure that we have at most 5 data points to avoid overlapping labels
+      if (otherProps.data && otherProps.data.labels) {
+        otherProps.data = sampleLineChartData(otherProps.data, 5);
+      }
       return (
         <LineChart
           {...otherProps}

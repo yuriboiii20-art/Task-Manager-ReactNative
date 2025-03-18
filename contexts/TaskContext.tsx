@@ -3,10 +3,10 @@ import { Task } from "../types/types";
 
 /**
  * Interface for the TaskContext value.
- * Now includes editTask to update an existing task.
+ * Contains the tasks state and functions to manage tasks.
  */
 interface TaskContextValue {
-  tasks: Task[];
+  tasks: Task[]; // Centralized state for tasks to share with the entire app
   addTask: (text: string, color: string, dueDate: Date) => void;
   toggleTask: (id: number) => void;
   deleteTask: (id: number) => void;
@@ -33,7 +33,7 @@ export const TaskContext = createContext<TaskContextValue>({
 
 /**
  * Reorders tasks based on their completion status.
- * Completed tasks are moved to the end of the list.
+ * Completed tasks are ALWAYS moved to the end of the list.
  *
  * @param list - The array of tasks to reorder.
  * @returns A new array of tasks sorted by completion status.
@@ -52,7 +52,7 @@ function reorderTasksAlg(list: Task[]) {
 export function TaskProvider({ children }: { children: React.ReactNode }) {
   const [tasks, setTasks] = useState<Task[]>([]);
 
-  // Example tasks
+  // Example tasks - inserted when the app is first loaded
   useEffect(() => {
     const initial: Task[] = [
       {
@@ -160,6 +160,7 @@ export function TaskProvider({ children }: { children: React.ReactNode }) {
     });
   };
 
+  // Provide the TaskContext value to its children
   return (
     <TaskContext.Provider
       value={{ tasks, addTask, toggleTask, deleteTask, reorderTasks, editTask }}

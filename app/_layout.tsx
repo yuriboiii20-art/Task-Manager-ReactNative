@@ -4,14 +4,8 @@ import React, {
   createContext,
   Dispatch,
   SetStateAction,
-  useRef,
 } from "react";
-import {
-  useColorScheme,
-  ColorSchemeName,
-  View,
-  StyleSheet,
-} from "react-native";
+import { useColorScheme, ColorSchemeName, View, Text } from "react-native";
 import { GestureHandlerRootView } from "react-native-gesture-handler";
 import { SafeAreaProvider, SafeAreaView } from "react-native-safe-area-context";
 import { StatusBar } from "expo-status-bar";
@@ -28,6 +22,7 @@ import Animated, {
   withTiming,
   interpolateColor,
 } from "react-native-reanimated";
+import { useFonts } from "expo-font";
 
 // Import custom color constants, hooks, and TaskProvider for task management
 import { LightColors, DarkColors } from "../constants/Colors";
@@ -55,21 +50,24 @@ export const ThemeOverrideContext = createContext<TThemeOverride>({
  * providing a theme context, safe area view, and task management.
  */
 export default function Layout() {
+  // Load custom fonts for the application using useFonts hook
+  const [fontsLoaded] = useFonts({
+    "Roboto-Regular": require("../assets/fonts/Roboto-Regular.ttf"),
+    "Roboto-Bold": require("../assets/fonts/Roboto-Bold.ttf"),
+  });
+
+  // Get the system color scheme and set up a color scheme override state
   const systemColorScheme = useColorScheme();
   const [colorSchemeOverride, setColorSchemeOverride] =
     useState<ColorSchemeName>();
-
-  // Set initial color scheme based on system preference
   useEffect(() => {
     if (!colorSchemeOverride) {
       setColorSchemeOverride(systemColorScheme);
     }
   }, [systemColorScheme]);
 
-  // Determine the current theme based on the override or system preference
+  // Determine the current theme based on system or override.
   const isDark = colorSchemeOverride === "dark";
-
-  // Light theme configuration
   const LightTheme = {
     ...MD3LightTheme,
     colors: {
@@ -80,8 +78,6 @@ export default function Layout() {
       onBackground: LightColors.text,
     },
   };
-
-  // Dark theme configuration
   const DarkTheme = {
     ...MD3DarkTheme,
     colors: {
@@ -92,26 +88,19 @@ export default function Layout() {
       onBackground: DarkColors.text,
     },
   };
-
-  // Determine the current theme and device status bar's theme
   const currentTheme = isDark ? DarkTheme : LightTheme;
   const barStyle = isDark ? "light" : "dark";
 
-  // Set up an animated transition for the background color for a smoother UX
+  // Set up an animated transition for the background color.
   const prevBackground =
     usePrevious(currentTheme.colors.background) ||
     currentTheme.colors.background;
   const progress = useSharedValue(1);
-
-  // Update the progress value when the background color changes
   useEffect(() => {
     progress.value = 0;
     progress.value = withTiming(1, { duration: 200 });
-    // Update device's navigation bar to match current background
     NavigationBar.setBackgroundColorAsync(currentTheme.colors.background);
   }, [currentTheme.colors.background]);
-
-  // Create an animated style that interpolates between the previous and current background color
   const animatedStyle = useAnimatedStyle(() => ({
     backgroundColor: interpolateColor(
       progress.value,
@@ -120,7 +109,7 @@ export default function Layout() {
     ),
   }));
 
-  // Render the layout with the current theme and animated background color
+  // Render the layout with the current theme and animated background color.
   return (
     <GestureHandlerRootView style={{ flex: 1 }}>
       <SafeAreaProvider>

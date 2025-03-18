@@ -59,6 +59,20 @@ export default function TaskItem({
     },
   ];
 
+  // Calculate if there's a meaningful time component (non-midnight)
+  // By default, the time is set to 08:00 PM of the due date (if not provided)
+  // Or the current time if the user is creating a new task
+  const dueDate = task.dueDate;
+  const hours = dueDate.getHours();
+  const minutes = dueDate.getMinutes();
+  const hasTime = hours !== 0 || minutes !== 0;
+
+  // Format time (2-digit hour and minute) for better readability
+  const formattedTime = dueDate.toLocaleTimeString([], {
+    hour: "2-digit",
+    minute: "2-digit",
+  });
+
   return (
     <>
       <Animated.View
@@ -103,7 +117,8 @@ export default function TaskItem({
               {task.text}
             </Text>
             <Text style={[styles.dueDate, { color: textColor }]}>
-              Due: {task.dueDate.toLocaleDateString()}
+              Due: {dueDate.toLocaleDateString()}
+              {hasTime ? ` at ${formattedTime}` : ""}
             </Text>
           </View>
         </Pressable>

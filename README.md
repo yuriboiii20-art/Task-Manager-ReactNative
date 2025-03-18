@@ -1,4 +1,4 @@
-# Task Manager React Native App 📱
+# TaskNexus - Task Manager React Native App 📱
 
 [![Project Version](https://img.shields.io/badge/Version-1.0.0-blue.svg)](package.json)
 [![React Native](https://img.shields.io/badge/React_Native-0.76.7-blue?logo=react)](https://reactnative.dev/)
@@ -54,7 +54,7 @@ It also features dark/light theme toggling with smooth transitions and a custom 
 ### Android
 
 <p align="center">
-  <img src="img/Flask-Android.png" width="19%">
+  <img src="img/Flash-Android.png" width="19%">
   <img src="img/Home-Android.png" width="19%">
   <img src="img/Stats-Android.png" width="19%">
   <img src="img/HomeDark-Android.png" width="19%">
@@ -250,7 +250,7 @@ Task-Manager-ReactNative
 │   ├── StatsScreenStyles.ts       # Custom styles for the Stats screen
 │   ├── IndexStyles.ts             # Custom styles for the Flash screen and redirection
 │   ├── LayoutStyles.ts            # Custom styles for the main layout
-│   ├── TaskAddModalStyles.ts      # Custom styles for the task add modal
+│   ├── TaskModalStyles.ts      # Custom styles for the task add modal
 │   ├── TaskItemStyles.ts          # Custom styles for individual task items
 │   ├── NotFoundStyles.ts          # Custom styles for the Not Found screen
 │   └── CustomTabStyles.ts         # Custom styles for the tab bar and related UI components

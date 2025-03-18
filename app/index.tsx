@@ -1,5 +1,11 @@
 import React, { useEffect, useState } from "react";
-import { View, Text } from "react-native";
+import { View } from "react-native";
+import Animated, {
+  useSharedValue,
+  useAnimatedStyle,
+  withTiming,
+  withDelay,
+} from "react-native-reanimated";
 import { Redirect } from "expo-router";
 import { styles } from "../styles/IndexStyles";
 
@@ -9,6 +15,26 @@ import { styles } from "../styles/IndexStyles";
 export default function Index() {
   const [redirect, setRedirect] = useState(false);
 
+  // Shared values for animations (only controlling opacity)
+  const titleOpacity = useSharedValue(0);
+  const subtitleOpacity = useSharedValue(0);
+
+  // Animate the title and subtitle fade-in on mount
+  useEffect(() => {
+    titleOpacity.value = withTiming(1, { duration: 1000 });
+    subtitleOpacity.value = withDelay(500, withTiming(1, { duration: 1000 }));
+  }, []);
+
+  // Animated style for title
+  const titleAnimatedStyle = useAnimatedStyle(() => ({
+    opacity: titleOpacity.value,
+  }));
+
+  // Animated style for subtitle
+  const subtitleAnimatedStyle = useAnimatedStyle(() => ({
+    opacity: subtitleOpacity.value,
+  }));
+
   // Set a timer to redirect after 3 seconds
   useEffect(() => {
     const timer = setTimeout(() => {
@@ -17,15 +43,19 @@ export default function Index() {
     return () => clearTimeout(timer);
   }, []);
 
-  // Navigate to home screen
+  // Navigate to home screen when redirect state is true
   if (redirect) {
     return <Redirect href="/(tabs)/home" />;
   }
 
   return (
     <View style={styles.container}>
-      <Text style={styles.title}>Task Manager</Text>
-      <Text style={styles.subtitle}>Stay Organized, Stay Ahead 🚀</Text>
+      <Animated.Text style={[styles.title, titleAnimatedStyle]}>
+        TaskNexus
+      </Animated.Text>
+      <Animated.Text style={[styles.subtitle, subtitleAnimatedStyle]}>
+        Stay Organized, Stay Ahead 🚀
+      </Animated.Text>
     </View>
   );
 }

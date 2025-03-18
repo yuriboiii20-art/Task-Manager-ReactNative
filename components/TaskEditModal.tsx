@@ -18,7 +18,7 @@ import DateTimePicker, {
 } from "@react-native-community/datetimepicker";
 
 // Import styles
-import { styles } from "../styles/TaskAddModalStyles";
+import { styles } from "../styles/TaskModalStyles";
 
 /**
  * Props for the TaskEditModal component.
@@ -81,6 +81,7 @@ export default function TaskEditModal({
   const [text, setText] = useState(task.text);
   const [date, setDate] = useState(new Date(task.dueDate));
   const [showDatePicker, setShowDatePicker] = useState(false);
+  const [showTimePicker, setShowTimePicker] = useState(false);
   const [color, setColor] = useState(task.color);
   const [customColor, setCustomColor] = useState("");
 
@@ -105,6 +106,13 @@ export default function TaskEditModal({
   };
 
   /**
+   * Open the time picker.
+   */
+  const openTimePicker = () => {
+    setShowTimePicker(true);
+  };
+
+  /**
    * Handle the date change event.
    *
    * @param event - The event type
@@ -113,7 +121,30 @@ export default function TaskEditModal({
   const onDateChange = (event: DateTimePickerEvent, selectedDate?: Date) => {
     if (Platform.OS === "android") setShowDatePicker(false); // Android doesn't close the date picker automatically
     if (selectedDate) {
-      setDate(selectedDate);
+      // Update only the date part, preserving the existing time
+      const current = new Date(date);
+      current.setFullYear(
+        selectedDate.getFullYear(),
+        selectedDate.getMonth(),
+        selectedDate.getDate(),
+      );
+      setDate(current);
+    }
+  };
+
+  /**
+   * Handle the time change event.
+   *
+   * @param event - The event type
+   * @param selectedTime - The selected time
+   */
+  const onTimeChange = (event: DateTimePickerEvent, selectedTime?: Date) => {
+    if (Platform.OS === "android") setShowTimePicker(false);
+    if (selectedTime) {
+      // Update only the time part, preserving the existing date
+      const current = new Date(date);
+      current.setHours(selectedTime.getHours(), selectedTime.getMinutes());
+      setDate(current);
     }
   };
 
@@ -146,16 +177,15 @@ export default function TaskEditModal({
               theme={{ colors: { onSurfaceVariant: colors.onBackground } }}
             />
 
-            {/* DATE PICKER */}
+            {/* DATE PICKER BUTTON */}
             <Button
               mode="outlined"
               style={[styles.input, { alignSelf: "stretch" }]}
               onPress={openDatePicker}
               textColor={colors.onBackground}
             >
-              Due Date: {date.toISOString().split("T")[0]}
+              Due Date: {date.toLocaleDateString()}
             </Button>
-
             {showDatePicker && (
               <View style={styles.datePickerContainer}>
                 <DateTimePicker
@@ -163,6 +193,33 @@ export default function TaskEditModal({
                   mode="date"
                   display={Platform.OS === "ios" ? "spinner" : "default"}
                   onChange={onDateChange}
+                  textColor={colors.onBackground}
+                />
+              </View>
+            )}
+
+            {/* TIME PICKER BUTTON */}
+            <Button
+              mode="outlined"
+              style={[styles.input, { alignSelf: "stretch" }]}
+              onPress={openTimePicker}
+              textColor={colors.onBackground}
+            >
+              Due Time:{" "}
+              {date.getHours() !== 0 || date.getMinutes() !== 0
+                ? date.toLocaleTimeString([], {
+                    hour: "2-digit",
+                    minute: "2-digit",
+                  })
+                : "Not Set"}
+            </Button>
+            {showTimePicker && (
+              <View style={styles.datePickerContainer}>
+                <DateTimePicker
+                  value={date}
+                  mode="time"
+                  display={Platform.OS === "ios" ? "spinner" : "default"}
+                  onChange={onTimeChange}
                   textColor={colors.onBackground}
                 />
               </View>

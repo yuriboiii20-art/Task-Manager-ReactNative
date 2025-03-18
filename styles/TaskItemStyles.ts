@@ -27,15 +27,15 @@ export const styles = StyleSheet.create({
     alignItems: "center",
   },
   textArea: {
-    flex: 1, // allows the text container to use the remaining space
+    flex: 1,
     marginLeft: 4,
     justifyContent: "center",
   },
   title: {
     fontSize: 16,
     fontWeight: "500",
-    flexWrap: "wrap", // wrap text to next line if it's too long
-    flexShrink: 1, // allow the text to shrink if needed
+    flexWrap: "wrap",
+    flexShrink: 1,
   },
   dueDate: {
     fontSize: 12,

@@ -16,7 +16,9 @@ import {
 import DateTimePicker, {
   DateTimePickerEvent,
 } from "@react-native-community/datetimepicker";
-import { styles } from "../styles/TaskAddModalStyles";
+
+// Import styles
+import { styles } from "../styles/TaskModalStyles";
 
 /**
  * Props for the TaskAddModal component.
@@ -70,8 +72,10 @@ const ContentWrapper: React.FC<{ children: React.ReactNode }> = ({
 export default function TaskAddModal({ visible, onClose, onAdd }: Props) {
   const { colors } = useTheme();
   const [text, setText] = useState("");
+  // Store a full Date (date and time) so that the user can set both
   const [date, setDate] = useState(new Date());
   const [showDatePicker, setShowDatePicker] = useState(false);
+  const [showTimePicker, setShowTimePicker] = useState(false);
   const [color, setColor] = useState("#ffffff");
   const [customColor, setCustomColor] = useState("");
 
@@ -84,7 +88,8 @@ export default function TaskAddModal({ visible, onClose, onAdd }: Props) {
     if (customColor.trim().length >= 3 && customColor.startsWith("#")) {
       finalColor = customColor;
     }
-    const dueString = date.toISOString().split("T")[0];
+    // Pass the full ISO string including time
+    const dueString = date.toISOString();
     onAdd(text.trim(), finalColor, dueString);
 
     // Reset the form
@@ -103,6 +108,13 @@ export default function TaskAddModal({ visible, onClose, onAdd }: Props) {
   };
 
   /**
+   * Opens the time picker modal.
+   */
+  const openTimePicker = () => {
+    setShowTimePicker(true);
+  };
+
+  /**
    * Handles the date change event from the date picker.
    *
    * @param event - The event that triggered the change.
@@ -111,7 +123,30 @@ export default function TaskAddModal({ visible, onClose, onAdd }: Props) {
   const onDateChange = (event: DateTimePickerEvent, selectedDate?: Date) => {
     if (Platform.OS === "android") setShowDatePicker(false); // Android doesn't close the date picker automatically
     if (selectedDate) {
-      setDate(selectedDate);
+      // Update only the date part, preserving the existing time
+      const current = new Date(date);
+      current.setFullYear(
+        selectedDate.getFullYear(),
+        selectedDate.getMonth(),
+        selectedDate.getDate(),
+      );
+      setDate(current);
+    }
+  };
+
+  /**
+   * Handles the time change event from the time picker.
+   *
+   * @param event - The event that triggered the change.
+   * @param selectedTime - The selected time.
+   */
+  const onTimeChange = (event: DateTimePickerEvent, selectedTime?: Date) => {
+    if (Platform.OS === "android") setShowTimePicker(false);
+    if (selectedTime) {
+      // Update only the time part, preserving the existing date
+      const current = new Date(date);
+      current.setHours(selectedTime.getHours(), selectedTime.getMinutes());
+      setDate(current);
     }
   };
 
@@ -144,16 +179,15 @@ export default function TaskAddModal({ visible, onClose, onAdd }: Props) {
               theme={{ colors: { onSurfaceVariant: colors.onBackground } }}
             />
 
-            {/* DATE PICKER */}
+            {/* DATE PICKER BUTTON */}
             <Button
               mode="outlined"
               style={[styles.input, { alignSelf: "stretch" }]}
               onPress={openDatePicker}
               textColor={colors.onBackground}
             >
-              Due Date: {date.toISOString().split("T")[0]}
+              Due Date: {date.toLocaleDateString()}
             </Button>
-
             {showDatePicker && (
               <View style={styles.datePickerContainer}>
                 <DateTimePicker
@@ -161,6 +195,33 @@ export default function TaskAddModal({ visible, onClose, onAdd }: Props) {
                   mode="date"
                   display={Platform.OS === "ios" ? "spinner" : "default"}
                   onChange={onDateChange}
+                  textColor={colors.onBackground}
+                />
+              </View>
+            )}
+
+            {/* TIME PICKER BUTTON */}
+            <Button
+              mode="outlined"
+              style={[styles.input, { alignSelf: "stretch" }]}
+              onPress={openTimePicker}
+              textColor={colors.onBackground}
+            >
+              Due Time:{" "}
+              {date.getHours() !== 0 || date.getMinutes() !== 0
+                ? date.toLocaleTimeString([], {
+                    hour: "2-digit",
+                    minute: "2-digit",
+                  })
+                : "Not Set"}
+            </Button>
+            {showTimePicker && (
+              <View style={styles.datePickerContainer}>
+                <DateTimePicker
+                  value={date}
+                  mode="time"
+                  display={Platform.OS === "ios" ? "spinner" : "default"}
+                  onChange={onTimeChange}
                   textColor={colors.onBackground}
                 />
               </View>

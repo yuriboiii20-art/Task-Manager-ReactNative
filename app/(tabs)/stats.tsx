@@ -21,6 +21,8 @@ const AnimatedScrollView = Animated.createAnimatedComponent(ScrollView);
 /**
  * StatsScreen component serves as the statistics screen for the task manager application,
  * it displays a summary of tasks, completion status, due dates, and tasks by month.
+ *
+ * A nice-to-have enhancement for the app!
  */
 export default function StatsScreen() {
   const { tasks } = useContext(TaskContext);
@@ -53,14 +55,15 @@ export default function StatsScreen() {
   // Count tasks by month for line chart
   const tasksByMonth: { [month: string]: number } = {};
 
-  // Loop through tasks to count overdue, upcoming, and by month
-  tasks.forEach((t) => {
-    const due = t.dueDate;
-    if (!t.completed && due < now) {
+  // Loop through tasks to count overdue and upcoming tasks (comparing full date/time to the minute)
+  tasks.forEach((task) => {
+    const due = task.dueDate;
+    if (!task.completed && due.getTime() < now.getTime()) {
       overdueCount++;
-    } else if (!t.completed && due >= now) {
+    } else if (!task.completed && due.getTime() >= now.getTime()) {
       upcomingCount++;
     }
+    // Group by month (if needed for the line chart)
     const monthKey = `${due.getFullYear()}-${String(due.getMonth() + 1).padStart(2, "0")}`;
     tasksByMonth[monthKey] = (tasksByMonth[monthKey] || 0) + 1;
   });
@@ -80,7 +83,7 @@ export default function StatsScreen() {
       color: "#e74c3c",
     },
   ];
-  // Prepare data for bar chart
+  // Prepare data for bar chart using the full comparison (including minutes)
   const barData = {
     labels: ["Overdue", "Upcoming"],
     datasets: [{ data: [overdueCount, upcomingCount] }],
@@ -115,7 +118,7 @@ export default function StatsScreen() {
     decimalPlaces: 0,
     propsForLabels: {
       fontSize: 12,
-      fontFamily: Platform.OS === "web" ? "Arial" : "System",
+      fontFamily: Platform.OS === "web" ? "Roboto-Regular" : "System",
     },
     propsForBackgroundLines: {
       stroke: colors.onBackground,
@@ -173,7 +176,11 @@ export default function StatsScreen() {
         <Card style={[styles.card, { backgroundColor: colors.surface }]}>
           <Card.Title
             title="Completion Status"
-            titleStyle={{ color: colors.onBackground, fontWeight: "bold" }}
+            titleStyle={{
+              color: colors.onBackground,
+              fontWeight: "bold",
+              fontFamily: Platform.OS === "web" ? "Roboto-Bold" : "System",
+            }}
           />
           <Card.Content>
             {totalTasks === 0 ? (
@@ -187,7 +194,9 @@ export default function StatsScreen() {
                   color: d.color,
                   legendFontColor: colors.onBackground,
                   legendFontSize: 14,
-                  legendFontFamily: Platform.OS === "web" ? "Arial" : "System", // Custom font for web
+                  // Force the legend font to use Roboto-Regular on web instead of Arial
+                  legendFontFamily:
+                    Platform.OS === "web" ? "Roboto-Regular" : "System",
                 }))}
                 width={screenWidth}
                 height={chartHeight}
@@ -208,7 +217,11 @@ export default function StatsScreen() {
         <Card style={[styles.card, { backgroundColor: colors.surface }]}>
           <Card.Title
             title="Overdue vs Upcoming Tasks"
-            titleStyle={{ color: colors.onBackground, fontWeight: "bold" }}
+            titleStyle={{
+              color: colors.onBackground,
+              fontWeight: "bold",
+              fontFamily: Platform.OS === "web" ? "Roboto-Bold" : "System",
+            }}
           />
           <Card.Content>
             {totalTasks === 0 ? (
@@ -240,7 +253,11 @@ export default function StatsScreen() {
         <Card style={[styles.card, { backgroundColor: colors.surface }]}>
           <Card.Title
             title="Task Due Dates by Month"
-            titleStyle={{ color: colors.onBackground, fontWeight: "bold" }}
+            titleStyle={{
+              color: colors.onBackground,
+              fontWeight: "bold",
+              fontFamily: Platform.OS === "web" ? "Roboto-Bold" : "System",
+            }}
           />
           <Card.Content>
             {monthKeys.length === 0 ? (
