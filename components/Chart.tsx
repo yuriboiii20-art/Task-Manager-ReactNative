@@ -94,12 +94,12 @@ const sampleLineChartData = (data: any, maxPoints: number = 5) => {
 /**
  * Chart component that renders a pie, bar, or line chart based on the type prop.
  *
- * @param props - The props for the chart component.
+ * @param props - The props for the chart component. Either PieChartCustomProps, BarChartCustomProps, or LineChartCustomProps.
  */
 const Chart: React.FC<ChartProps> = (props) => {
   const { type, ...rest } = props;
 
-  // Render the appropriate chart based on the type prop
+  // Render the appropriate chart based on the type prop, using react-native-chart-kit components
   switch (type) {
     case "pie": {
       const {
