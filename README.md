@@ -284,7 +284,7 @@ Currently, the app provides essential task management features with a focus on s
 In the near future, if I have more time, I would love to implement the following features that I have in mind:
 
 - **User Authentication:** Implement user authentication for personalized task management.
-  - This would enable cloud storage for tasks and user-specific settings.
+  - This would enable cloud storage/synchronization for tasks and user-specific settings. It would also allow multiple users to use the app on the same device.
 - **Task Categories:** Add categories for tasks to organize them better.
 - **Task Reminders:** Include reminders for tasks with notifications.
 
