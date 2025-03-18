@@ -290,9 +290,10 @@ In the near future, if I have more time, I would love to implement the following
 - **Task Sharing:** Enable task sharing with other users.
 - **Task Search & Filtering:** Implement search and filter options for tasks.
 - **Task Priority:** Add priority levels for tasks.
+- **
 
-These features would be similar to another app of mine, [CollabNote](https://github.com/hoangsonww/CollabNote-Fullstack-App),
-
+These features would make TaskNexus similar to another app of mine, [CollabNote](https://github.com/hoangsonww/CollabNote-Fullstack-App),
+which is a full-stack web application for collaborative note-taking with user authentication, real-time updates, and more.
 
 ## License
 
