@@ -280,8 +280,13 @@ Task-Manager-ReactNative
 
 ## Future Enhancements
 
+Currently, the app provides essential task management features with a focus on simplicity and usability.
+In the near future, if I have more time, I would love to implement the following features that I have in mind:
+
 - **User Authentication:** Implement user authentication for personalized task management.
-- 
+  - This would enable cloud storage for tasks and user-specific settings.
+- **Task Categories:** Add categories for tasks to organize them better.
+- **Task Reminders:** Include reminders for tasks with notifications.
 
 ## License
 
