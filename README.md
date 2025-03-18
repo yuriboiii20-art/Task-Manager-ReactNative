@@ -287,6 +287,11 @@ In the near future, if I have more time, I would love to implement the following
   - This would enable cloud storage/synchronization for tasks and user-specific settings. It would also allow multiple users to use the app on the same device.
 - **Task Categories:** Add categories for tasks to organize them better.
 - **Task Reminders:** Include reminders for tasks with notifications.
+- **Task Sharing:** Enable task sharing with other users.
+- **Task Search & Filtering:** Implement search and filter options for tasks.
+- **Task Priority:** Add priority levels for tasks.
+
+These features
 
 ## License
 
