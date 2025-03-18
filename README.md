@@ -291,7 +291,8 @@ In the near future, if I have more time, I would love to implement the following
 - **Task Search & Filtering:** Implement search and filter options for tasks.
 - **Task Priority:** Add priority levels for tasks.
 
-These features
+These features would be similar to another app of mine, [CollabNote](https://github.com/hoangsonww/CollabNote-Fullstack-App),
+
 
 ## License
 
