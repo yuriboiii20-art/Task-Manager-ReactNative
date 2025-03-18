@@ -28,6 +28,7 @@ export const DarkColors = {
 
 /**
  * Returns '#000000' or '#FFFFFF' for strong contrast against a given hex background.
+ * This is to ensure text is readable when placed on top of the background color.
  */
 export function getContrastTextColor(backgroundColor: string): string {
   try {
