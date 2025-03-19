@@ -5,7 +5,7 @@ import {
   TouchableWithoutFeedback,
   Platform,
   Animated,
-  Easing
+  Easing,
 } from "react-native";
 import {
   Modal,
@@ -125,7 +125,6 @@ export default function TaskAddModal({ visible, onClose, onAdd }: Props) {
       setShowTimePicker(true);
     }
   };
-
 
   /**
    * Handles the date change event from the date picker.
