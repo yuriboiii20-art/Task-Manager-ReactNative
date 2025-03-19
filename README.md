@@ -277,6 +277,7 @@ Task-Manager-ReactNative
 ├── assets
 │   ├── fonts                      # Custom fonts for the app (Roboto)
 │   └── images                     # Images used in the app
+├── img                            # Screenshots and GIFs for the README
 └── shell                          # Shell scripts for common tasks
     ├── run-platform.sh            # Script to run the app on a specific platform
     ├── format.sh                  # Script to format the project code
