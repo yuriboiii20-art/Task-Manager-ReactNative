@@ -36,6 +36,10 @@ export default function StatsScreen() {
     progress.value = 0;
     progress.value = withTiming(1, { duration: 200 });
   }, [colors.background]);
+
+  /**
+   * Animated style that interpolates between the previous and current background color.
+   */
   const animatedStyle = useAnimatedStyle(() => ({
     backgroundColor: interpolateColor(
       progress.value,
