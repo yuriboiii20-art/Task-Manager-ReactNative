@@ -10,6 +10,7 @@
 [![Prettier](https://img.shields.io/badge/Prettier-3.5.3-blue?logo=prettier)](https://prettier.io/)
 [![React Native Paper](https://img.shields.io/badge/React_Native_Paper-5.13.1-blue.svg)](https://callstack.github.io/react-native-paper/)
 [![React Native Chart Kit](https://img.shields.io/badge/React_Native_Chart_Kit-6.12.0-blue.svg)](https://www.npmjs.com/package/react-native-chart-kit)
+[]
 [![MIT License](https://img.shields.io/badge/License-MIT-orange.svg)](LICENSE)
 
 ## Table of Contents
