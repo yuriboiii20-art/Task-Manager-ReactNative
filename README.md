@@ -150,6 +150,7 @@ I hope its name and branding convey a sense of connectivity and organization, wi
   ```bash
   npm install -g expo-cli
   ```
+- Android/iOS Emulator or Physical Device: For testing on mobile platforms.
 
 ### Clone the Repository
 
