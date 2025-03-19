@@ -48,11 +48,13 @@ export default function StatsScreen() {
     ),
   }));
 
+  // ---- PREPARE DATA FOR CHARTS ----
   // Calculate statistics based on task data from taskContext
   const totalTasks = tasks.length;
   const completedTasks = tasks.filter((t) => t.completed).length;
   const now = new Date();
 
+  // Count overdue and upcoming tasks
   let overdueCount = 0;
   let upcomingCount = 0;
 
@@ -87,16 +89,20 @@ export default function StatsScreen() {
       color: "#e74c3c",
     },
   ];
+
   // Prepare data for bar chart using the full comparison (including minutes)
   const barData = {
     labels: ["Overdue", "Upcoming"],
     datasets: [{ data: [overdueCount, upcomingCount] }],
   };
+
   // Prepare data for line chart
   let lineChartData = {
     labels: monthKeys,
     datasets: [{ data: monthData }],
   };
+
+  // If there's only one month, duplicate the data to show a single point on the line chart
   if (monthKeys.length === 1) {
     lineChartData = {
       labels: [monthKeys[0], monthKeys[0]],
@@ -130,6 +136,7 @@ export default function StatsScreen() {
     },
   };
 
+  // Render the StatsScreen component
   return (
     <AnimatedScrollView style={[styles.container, animatedStyle]}>
       {/* Header */}
