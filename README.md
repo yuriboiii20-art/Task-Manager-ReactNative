@@ -85,7 +85,7 @@ I hope its name and branding convey a sense of connectivity and organization, wi
   <img src="img/Web.png" width="80%" alt="Task Manager App - Web">
 </p>
 
-### Screen Recordings
+### Screen Recordings (GIFs)
 
 <p align="center">
   <img src="img/ios.gif" alt="Task Manager App - iOS" width="47%">
