@@ -52,7 +52,7 @@ I hope its name and branding convey a sense of connectivity and organization, wi
 ### iOS
 
 <p align="center">
-  <img src="img/Flash-IP.png" width="19%">
+  <img src="img/Flash-IP.png" width="19%" alt="Task Manager App - iOS">
   <img src="img/Home-IP.png" width="19%">
   <img src="img/Stats-IP.png" width="19%">
   <img src="img/HomeDark-IP.png" width="19%">
@@ -72,10 +72,10 @@ I hope its name and branding convey a sense of connectivity and organization, wi
 ### Modals
 
 <p align="center">
-  <img src="img/AddModal.png" width="22%">
-  <img src="img/AddModalDark.png" width="22%">
-  <img src="img/EditModal.png" width="22%">
-  <img src="img/EditModalDark.png" width="22%">
+  <img src="img/AddModal.png" width="22%" alt="Task Manager App - Add Modal">
+  <img src="img/AddModalDark.png" width="22%" alt="Task Manager App - Add Modal Dark">
+  <img src="img/EditModal.png" width="22%" alt="Task Manager App - Edit Modal">
+  <img src="img/EditModalDark.png" width="22%" alt="Task Manager App - Edit Modal Dark">
 </p>
 
 ### Web
