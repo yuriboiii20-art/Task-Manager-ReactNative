@@ -151,6 +151,7 @@ I hope its name and branding convey a sense of connectivity and organization, wi
   npm install -g expo-cli
   ```
 - Android/iOS Emulator or Physical Device: For testing on mobile platforms.
+  - This is required for testing the app on Android/iOS devices. Alternatively, you can use the web version for a quick preview.
 
 ### Clone the Repository
 
