@@ -14,7 +14,7 @@ import Animated, {
 } from "react-native-reanimated";
 import { Ionicons } from "@expo/vector-icons";
 
-// Import custom styles and TaskEditModal component
+// Import custom styles, TaskEditModal component, and utility functions
 import TaskEditModal from "./TaskEditModal";
 import { getContrastTextColor } from "../constants/Colors";
 import { Task } from "../types/types";
