@@ -30,6 +30,7 @@
 - [Usage Instructions](#usage-instructions)
 - [File Structure](#file-structure)
 - [Scripts & Tools](#scripts--tools)
+- [Known Issue](#known-issue)
 - [Future Enhancements](#future-enhancements)
 - [License](#license)
 - [Contact](#contact)
@@ -192,7 +193,7 @@ npx expo start
 Then:
 
 - Open the app on your device using the Expo Go app, or
-- Use an Android/iOS simulator (remember to press `a` or `i` in the terminal to open the app on Android/iOS, respectively), or
+- Use an Android/iOS simulator (remember to press `a` or `i` in the terminal to open the app on Android/iOS, respectively, with the simulator/emulator running), or
 - Open the project in a web browser for a quick preview (remember to press `w` in the terminal, it will then open a new tab in your default browser).
 
 ---
@@ -290,6 +291,14 @@ Task-Manager-ReactNative
   - Use the script by first running `chmod +x <script-name>.sh` to make it executable, then run `./<script-name>.sh` to execute it.
 - **Dockerfile (Optional)**: A Dockerfile is provided to containerize the app if needed. However, since mobile testing requires physical devices or emulators, the Dockerfile is designed only for the web version of the app.
   - Use the Docker Compose file (`docker-compose.yml`) to build and run the Docker container, by running `docker-compose up --build`. Ensure that Docker is installed and running on your system.
+
+## Known Issue
+
+- The **React Native Draggable FlatList** library has a known issue dragging and dropping an item causes it to quickly flash back to its original position before settling in the new position. This is a minor visual glitch and does not affect functionality.
+  - This issue is widely reported in both StackOverflow and GitHub discussions, and it seems to be a limitation of the library itself. I have tried several workarounds, but none have resolved the issue completely.
+  - If given more time, I would explore alternative libraries or custom implementations to achieve a smoother drag-and-drop experience.
+  - For now, the app remains fully functional, and users can still drag and drop tasks without any issues.
+  - The app is designed to be user-friendly, and this minor visual glitch does not hinder the overall experience.
 
 ## Future Enhancements
 
