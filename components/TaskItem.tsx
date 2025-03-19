@@ -13,10 +13,12 @@ import Animated, {
   FadeOutUp,
 } from "react-native-reanimated";
 import { Ionicons } from "@expo/vector-icons";
+
+// Import custom styles and TaskEditModal component
+import TaskEditModal from "./TaskEditModal";
 import { getContrastTextColor } from "../constants/Colors";
 import { Task } from "../types/types";
 import { styles } from "../styles/TaskItemStyles";
-import TaskEditModal from "./TaskEditModal";
 
 /**
  * Props for the TaskItem component.
