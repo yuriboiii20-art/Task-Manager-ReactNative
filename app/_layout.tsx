@@ -66,7 +66,8 @@ export default function Layout() {
     }
   }, [systemColorScheme]);
 
-  // Determine the current theme based on system or override.
+  // Determine the current theme based on system or override color scheme
+  // if the user has selected a dark/light mode override
   const isDark = colorSchemeOverride === "dark";
   const LightTheme = {
     ...MD3LightTheme,
