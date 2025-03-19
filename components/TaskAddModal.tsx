@@ -57,6 +57,7 @@ const ContentWrapper: React.FC<{ children: React.ReactNode }> = ({
   if (Platform.OS === "web") {
     return <View>{children}</View>;
   }
+
   return (
     <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
       {children}
@@ -87,9 +88,12 @@ export default function TaskAddModal({ visible, onClose, onAdd }: Props) {
   const handleAddTask = () => {
     if (!text.trim()) return;
     let finalColor = color;
+
+    // Check if the user entered a valid custom hex color
     if (customColor.trim().length >= 3 && customColor.startsWith("#")) {
       finalColor = customColor;
     }
+
     // Pass the full ISO string including time
     const dueString = date.toISOString();
     onAdd(text.trim(), finalColor, dueString);
