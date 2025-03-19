@@ -331,4 +331,4 @@ For any questions, feedback, or suggestions, please contact:
 
 ---
 
-**Thank you for checking out the Task Manager React Native App! 🚀**
+**Thank you for checking out the Task Manager React Native App! 🚀📲**
