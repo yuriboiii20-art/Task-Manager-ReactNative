@@ -35,7 +35,7 @@ export default function Index() {
     opacity: subtitleOpacity.value,
   }));
 
-  // Set a timer to redirect after 3 seconds
+  // Set a timer to redirect to home after 3 seconds
   useEffect(() => {
     const timer = setTimeout(() => {
       setRedirect(true);
