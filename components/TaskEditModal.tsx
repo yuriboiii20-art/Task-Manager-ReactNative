@@ -70,6 +70,12 @@ const ContentWrapper: React.FC<{ children: React.ReactNode }> = ({
 
 /**
  * TaskEditModal component provides a modal to edit an existing task.
+ *
+ * @param visible - The visibility of the modal
+ * @param onClose - The function to close the modal
+ * @param task - The task to edit
+ * @param onEdit - The function to edit the task
+ * @returns A TaskEditModal component
  */
 export default function TaskEditModal({
   visible,
@@ -95,21 +101,40 @@ export default function TaskEditModal({
       finalColor = customColor;
     }
     onEdit(text.trim(), finalColor, date);
+    handleClose();
+  };
+
+  /**
+   * Handle the close action.
+   */
+  const handleClose = () => {
+    setShowDatePicker(false);
+    setShowTimePicker(false);
     onClose();
   };
 
   /**
-   * Open the date picker.
+   * Opens the date picker modal.
    */
   const openDatePicker = () => {
-    setShowDatePicker(true);
+    if (showTimePicker) {
+      setShowTimePicker(false);
+      setTimeout(() => setShowDatePicker(true), 200);
+    } else {
+      setShowDatePicker(true);
+    }
   };
 
   /**
-   * Open the time picker.
+   * Opens the time picker modal.
    */
   const openTimePicker = () => {
-    setShowTimePicker(true);
+    if (showDatePicker) {
+      setShowDatePicker(false);
+      setTimeout(() => setShowTimePicker(true), 200);
+    } else {
+      setShowTimePicker(true);
+    }
   };
 
   /**
@@ -152,7 +177,7 @@ export default function TaskEditModal({
     <Portal>
       <Modal
         visible={visible}
-        onDismiss={onClose}
+        onDismiss={handleClose}
         contentContainerStyle={[
           styles.container,
           { backgroundColor: colors.surface },
@@ -255,7 +280,7 @@ export default function TaskEditModal({
             />
 
             <View style={styles.row}>
-              <Button onPress={onClose} style={styles.button}>
+              <Button onPress={handleClose} style={styles.button}>
                 Cancel
               </Button>
               <Button

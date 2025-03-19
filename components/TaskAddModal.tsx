@@ -103,7 +103,7 @@ export default function TaskAddModal({ visible, onClose, onAdd }: Props) {
     setCustomColor("");
     setColor("#ffffff");
     setDate(new Date());
-    onClose();
+    handleClose();
   };
 
   /**
@@ -128,6 +128,15 @@ export default function TaskAddModal({ visible, onClose, onAdd }: Props) {
     } else {
       setShowTimePicker(true);
     }
+  };
+
+  /**
+   * Closes the modal.
+   */
+  const handleClose = () => {
+    setShowDatePicker(false);
+    setShowTimePicker(false);
+    onClose();
   };
 
   /**
@@ -170,7 +179,7 @@ export default function TaskAddModal({ visible, onClose, onAdd }: Props) {
     <Portal>
       <Modal
         visible={visible}
-        onDismiss={onClose}
+        onDismiss={handleClose}
         contentContainerStyle={[
           styles.container,
           { backgroundColor: colors.surface },
@@ -273,7 +282,7 @@ export default function TaskAddModal({ visible, onClose, onAdd }: Props) {
             />
 
             <View style={styles.row}>
-              <Button onPress={onClose} style={styles.button}>
+              <Button onPress={handleClose} style={styles.button}>
                 Cancel
               </Button>
               <Button
