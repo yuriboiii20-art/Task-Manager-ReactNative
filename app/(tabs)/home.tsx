@@ -53,6 +53,9 @@ export default function HomeScreen() {
     progress.value = withTiming(1, { duration: 200 });
   }, [colors.background]);
 
+  /**
+   * Animated style that interpolates between the previous and current background color.
+   */
   const animatedStyle = useAnimatedStyle(() => {
     const bg = interpolateColor(
       progress.value,
