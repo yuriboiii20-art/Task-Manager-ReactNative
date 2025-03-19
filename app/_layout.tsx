@@ -92,7 +92,7 @@ export default function Layout() {
   const currentTheme = isDark ? DarkTheme : LightTheme;
   const barStyle = isDark ? "light" : "dark";
 
-  // Set up an animated transition for the background color.
+  // Set up an animated transition for the background color for a smoother UX
   const prevBackground =
     usePrevious(currentTheme.colors.background) ||
     currentTheme.colors.background;

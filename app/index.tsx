@@ -48,6 +48,7 @@ export default function Index() {
     return <Redirect href="/(tabs)/home" />;
   }
 
+  // Render the splash screen with title and subtitle of the app
   return (
     <View style={styles.container}>
       <Animated.Text style={[styles.title, titleAnimatedStyle]}>
