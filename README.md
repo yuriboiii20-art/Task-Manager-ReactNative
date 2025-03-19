@@ -336,4 +336,6 @@ For any questions, feedback, or suggestions, please contact:
 
 ---
 
-**Thank you for checking out the Task Manager React Native App! 🚀📲**
+**Thank you for checking out TaskNexus - Task Manager React Native App! 🚀📲**
+
+**[🔝 Back to top](#tasknexus---task-manager-react-native-app-)**
