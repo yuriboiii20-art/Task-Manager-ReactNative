@@ -16,7 +16,7 @@ import { Ionicons } from "@expo/vector-icons";
 import { getContrastTextColor } from "../constants/Colors";
 import { Task } from "../types/types";
 import { styles } from "../styles/TaskItemStyles";
-import TaskEditModal from "./TaskEditModal"; // adjust path as needed
+import TaskEditModal from "./TaskEditModal";
 
 /**
  * Props for the TaskItem component.
