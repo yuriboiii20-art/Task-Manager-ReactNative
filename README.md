@@ -195,6 +195,7 @@ Then:
 - Open the app on your device using the Expo Go app, or
 - Use an Android/iOS simulator (remember to press `a` or `i` in the terminal to open the app on Android/iOS, respectively, with the simulator/emulator running), or
 - Open the project in a web browser for a quick preview (remember to press `w` in the terminal, it will then open a new tab in your default browser).
+  > Note: The web version may not display correctly on larger screens. Also, some functionalities, like drag-and-drop, date picker, time picker, etc. may not work as expected on the web since they are designed for mobile devices.
 
 ---
 
