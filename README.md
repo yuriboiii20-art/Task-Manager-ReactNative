@@ -62,11 +62,11 @@ I hope its name and branding convey a sense of connectivity and organization, wi
 ### Android
 
 <p align="center">
-  <img src="img/Flash-Android.png" width="19%">
-  <img src="img/Home-Android.png" width="19%">
-  <img src="img/Stats-Android.png" width="19%">
-  <img src="img/HomeDark-Android.png" width="19%">
-  <img src="img/StatsDark-Android.png" width="19%">
+  <img src="img/Flash-Android.png" width="19%" alt="Task Manager App - Android">
+  <img src="img/Home-Android.png" width="19%" alt="Task Manager App - Android">
+  <img src="img/Stats-Android.png" width="19%" alt="Task Manager App - Android">
+  <img src="img/HomeDark-Android.png" width="19%" alt="Task Manager App - Android">
+  <img src="img/StatsDark-Android.png" width="19%" alt="Task Manager App - Android">
 </p>
 
 ### Modals
@@ -81,7 +81,7 @@ I hope its name and branding convey a sense of connectivity and organization, wi
 ### Web
 
 <p align="center">
-  <img src="img/Web.png" width="80%">
+  <img src="img/Web.png" width="80%" alt="Task Manager App - Web">
 </p>
 
 ### Screen Recordings
