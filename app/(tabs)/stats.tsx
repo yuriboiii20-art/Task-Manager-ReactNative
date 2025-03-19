@@ -67,7 +67,7 @@ export default function StatsScreen() {
     } else if (!task.completed && due.getTime() >= now.getTime()) {
       upcomingCount++;
     }
-    // Group by month (if needed for the line chart)
+    // Group by month (needed for the line chart)
     const monthKey = `${due.getFullYear()}-${String(due.getMonth() + 1).padStart(2, "0")}`;
     tasksByMonth[monthKey] = (tasksByMonth[monthKey] || 0) + 1;
   });
