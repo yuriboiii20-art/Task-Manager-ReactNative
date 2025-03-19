@@ -138,7 +138,7 @@ I hope its name and branding convey a sense of connectivity and organization, wi
 - **JSDoc & TypeScript Definitions:** Documented code for better understanding and type safety.
 - **Custom Fonts & Images:** Includes custom fonts (Roboto) and images for branding.
 - **Shell Scripts:** Simplify common tasks with custom shell scripts.
-- and more...
+- and many more...
 
 ## Installation & Setup
 
