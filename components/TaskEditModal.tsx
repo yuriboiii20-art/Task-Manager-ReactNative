@@ -139,7 +139,7 @@ export default function TaskEditModal({
    * @param selectedTime - The selected time
    */
   const onTimeChange = (event: DateTimePickerEvent, selectedTime?: Date) => {
-    if (Platform.OS === "android") setShowTimePicker(false);
+    if (Platform.OS === "android") setShowTimePicker(false); // Android doesn't close the time picker automatically
     if (selectedTime) {
       // Update only the time part, preserving the existing date
       const current = new Date(date);
