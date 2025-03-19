@@ -102,6 +102,10 @@ export default function Layout() {
     progress.value = withTiming(1, { duration: 200 });
     NavigationBar.setBackgroundColorAsync(currentTheme.colors.background);
   }, [currentTheme.colors.background]);
+
+  /**
+   * Animated style that interpolates between the previous and current background color.
+   */
   const animatedStyle = useAnimatedStyle(() => ({
     backgroundColor: interpolateColor(
       progress.value,
