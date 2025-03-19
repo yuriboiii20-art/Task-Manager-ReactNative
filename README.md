@@ -53,10 +53,10 @@ I hope its name and branding convey a sense of connectivity and organization, wi
 
 <p align="center">
   <img src="img/Flash-IP.png" width="19%" alt="Task Manager App - iOS">
-  <img src="img/Home-IP.png" width="19%">
-  <img src="img/Stats-IP.png" width="19%">
-  <img src="img/HomeDark-IP.png" width="19%">
-  <img src="img/StatsDark-IP.png" width="19%">
+  <img src="img/Home-IP.png" width="19%" alt="Task Manager App - iOS">
+  <img src="img/Stats-IP.png" width="19%" alt="Task Manager App - iOS">
+  <img src="img/HomeDark-IP.png" width="19%" alt="Task Manager App - iOS">
+  <img src="img/StatsDark-IP.png" width="19%" alt="Task Manager App - iOS">
 </p>
 
 ### Android
