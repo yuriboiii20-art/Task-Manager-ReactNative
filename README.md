@@ -285,7 +285,7 @@ Task-Manager-ReactNative
 
 - **reset-project.js:** Located in the `scripts` folder, this script resets the project state as needed.
 - **Prettier:** Integrated to maintain code quality and consistent formatting.
-  - Use by simply running `npm run format` or `yarn format` to format the entire project.
+  - Use by simply running `npm run format` or `yarn format` to format the entire project. It formats most (if not all) files in the project according to the Prettier configuration.
 - **Documented Code:** Includes JSDoc comments for functions and TypeScript type definitions for better code understanding.
 - **Shell Scripts**: Several shell scripts are included to simplify common tasks, such as starting the app, resetting the project, and updating dependencies. Feel free to use them for easier project management!
   - Use the script by first running `chmod +x <script-name>.sh` to make it executable, then run `./<script-name>.sh` to execute it.
