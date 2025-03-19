@@ -19,7 +19,7 @@
   - [iOS](#ios)
   - [Android](#android)
   - [Web](#web)
-  - [Screen Recordings](#screen-recordings)
+  - [Screen Recordings (GIFs)](#screen-recordings-gifs)
 - [Features](#features)
 - [Technical Stack](#technical-stack)
 - [Installation & Setup](#installation--setup)
