@@ -4,6 +4,8 @@ import {
   Keyboard,
   TouchableWithoutFeedback,
   Platform,
+  Animated,
+  Easing
 } from "react-native";
 import {
   Modal,
@@ -104,15 +106,26 @@ export default function TaskAddModal({ visible, onClose, onAdd }: Props) {
    * Opens the date picker modal.
    */
   const openDatePicker = () => {
-    setShowDatePicker(true);
+    if (showTimePicker) {
+      setShowTimePicker(false);
+      setTimeout(() => setShowDatePicker(true), 200);
+    } else {
+      setShowDatePicker(true);
+    }
   };
 
   /**
    * Opens the time picker modal.
    */
   const openTimePicker = () => {
-    setShowTimePicker(true);
+    if (showDatePicker) {
+      setShowDatePicker(false);
+      setTimeout(() => setShowTimePicker(true), 200);
+    } else {
+      setShowTimePicker(true);
+    }
   };
+
 
   /**
    * Handles the date change event from the date picker.
