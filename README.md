@@ -135,12 +135,16 @@ I hope its name and branding convey a sense of connectivity and organization, wi
 
 ## Technical Stack
 
+TaskNexus is built using a modern tech stack that includes:
+
 - **React Native:** Core framework for building cross-platform mobile applications.
 - **Expo:** Provides a robust development workflow and build process.
 - **TypeScript:** Enhances code quality with static type checking.
 - **React Navigation / Expo Router:** Manages navigation and deep linking.
 - **React Native Paper:** Offers Material Design components and theming.
 - **React Native Chart Kit:** Renders customizable charts (pie, bar, line).
+- **React Native Draggable FlatList:** Enables drag-and-drop reordering of tasks.
+- **React Native DateTime Picker:** Provides a user-friendly date and time selection interface.
 - **Reanimated:** Powers smooth and performant UI animations.
 - **Prettier:** Maintains code quality and consistent formatting.
 - **JSDoc & TypeScript Definitions:** Documented code for better understanding and type safety.
