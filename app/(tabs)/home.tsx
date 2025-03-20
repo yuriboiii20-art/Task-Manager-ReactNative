@@ -34,7 +34,10 @@ function getGreeting() {
 /**
  * HomeScreen component serves as the main screen for the task manager application,
  * it displays the list of tasks, allows adding new tasks, and provides drag-and-drop functionality
- * for reordering tasks
+ * for reordering tasks.
+ *
+ * Delegates task management to the TaskContext, which provides functions for adding,
+ * editing, toggling, deleting, and reordering tasks, following the Delegate design pattern.
  */
 export default function HomeScreen() {
   // Get task data and functions from TaskContext

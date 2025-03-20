@@ -140,6 +140,7 @@ I hope its name and branding convey a sense of connectivity and organization, wi
 TaskNexus is built using a modern tech stack that includes both core and third-party libraries to enhance functionality and user experience. Here are the key components:
 
 ### **Core Dependencies:**
+
 - **React Native:** Core framework for building cross-platform mobile applications.
 - **TypeScript:** Enhances code quality with static type checking.
 - **React Context API:** Manages global state for tasks and theme overrides.
@@ -149,6 +150,7 @@ TaskNexus is built using a modern tech stack that includes both core and third-p
 - **React Native Safe Area:** Ensures proper layout and spacing on devices with notches or rounded corners.
 
 ### **Third-Party Dependencies:**
+
 - **Expo:** Provides a robust development workflow and build process.
 - **Expo Font:** Simplifies font loading and management (custom Google fonts included).
 - **Expo Status Bar:** Customizes the status bar for better aesthetics and user experience.
@@ -160,6 +162,7 @@ TaskNexus is built using a modern tech stack that includes both core and third-p
 - **Prettier:** Maintains code quality and consistent formatting.
 
 ### **Other:**
+
 - **JSDoc & TypeScript Definitions:** Documented code for better understanding and type safety.
 - **Google Fonts:** Includes custom Google fonts (Roboto) and images for branding.
 - **Shell Scripts:** Simplify common tasks with custom shell scripts.
