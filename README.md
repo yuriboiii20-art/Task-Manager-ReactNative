@@ -44,6 +44,10 @@ The app allows users to manage their daily tasks efficiently, with features like
 The app also includes a dedicated Stats screen with interactive charts (pie, bar, and line) for visualizing task statistics.
 It also features dark/light theme toggling with smooth transitions and a custom bottom tab bar for a better UI/UX.
 
+<p align="center">
+  <img src="img/figma-design.png" width="100%" alt="TaskNexus Logo">
+</p>
+
 ### TaskNexus Branding
 
 I chose the name "TaskNexus" for the app to reflect its core purpose - a central hub for managing tasks.
@@ -53,43 +57,43 @@ I hope its name and branding convey a sense of connectivity and organization, wi
 ### iOS
 
 <p align="center">
-  <img src="img/Flash-IP.png" width="19%" alt="Task Manager App - iOS">
-  <img src="img/Home-IP.png" width="19%" alt="Task Manager App - iOS">
-  <img src="img/Stats-IP.png" width="19%" alt="Task Manager App - iOS">
-  <img src="img/HomeDark-IP.png" width="19%" alt="Task Manager App - iOS">
-  <img src="img/StatsDark-IP.png" width="19%" alt="Task Manager App - iOS">
+  <img src="img/Flash-IP.png" width="19%" alt="Task Manager App - iOS" style="border-radius: 10px;">
+  <img src="img/Home-IP.png" width="19%" alt="Task Manager App - iOS" style="border-radius: 10px;">
+  <img src="img/Stats-IP.png" width="19%" alt="Task Manager App - iOS" style="border-radius: 10px;">
+  <img src="img/HomeDark-IP.png" width="19%" alt="Task Manager App - iOS" style="border-radius: 10px;">
+  <img src="img/StatsDark-IP.png" width="19%" alt="Task Manager App - iOS" style="border-radius: 10px;">
 </p>
 
 ### Android
 
 <p align="center">
-  <img src="img/Flash-Android.png" width="19%" alt="Task Manager App - Android">
-  <img src="img/Home-Android.png" width="19%" alt="Task Manager App - Android">
-  <img src="img/Stats-Android.png" width="19%" alt="Task Manager App - Android">
-  <img src="img/HomeDark-Android.png" width="19%" alt="Task Manager App - Android">
-  <img src="img/StatsDark-Android.png" width="19%" alt="Task Manager App - Android">
+  <img src="img/Flash-Android.png" width="19%" alt="Task Manager App - Android" style="border-radius: 10px;">
+  <img src="img/Home-Android.png" width="19%" alt="Task Manager App - Android" style="border-radius: 10px;">
+  <img src="img/Stats-Android.png" width="19%" alt="Task Manager App - Android" style="border-radius: 10px;">
+  <img src="img/HomeDark-Android.png" width="19%" alt="Task Manager App - Android" style="border-radius: 10px;">
+  <img src="img/StatsDark-Android.png" width="19%" alt="Task Manager App - Android" style="border-radius: 10px;">
 </p>
 
 ### Modals
 
 <p align="center">
-  <img src="img/AddModal.png" width="22%" alt="Task Manager App - Add Modal">
-  <img src="img/AddModalDark.png" width="22%" alt="Task Manager App - Add Modal Dark">
-  <img src="img/EditModal.png" width="22%" alt="Task Manager App - Edit Modal">
-  <img src="img/EditModalDark.png" width="22%" alt="Task Manager App - Edit Modal Dark">
+  <img src="img/AddModal.png" width="22%" alt="Task Manager App - Add Modal" style="border-radius: 10px;">
+  <img src="img/AddModalDark.png" width="22%" alt="Task Manager App - Add Modal Dark" style="border-radius: 10px;">
+  <img src="img/EditModal.png" width="22%" alt="Task Manager App - Edit Modal" style="border-radius: 10px;">
+  <img src="img/EditModalDark.png" width="22%" alt="Task Manager App - Edit Modal Dark" style="border-radius: 10px;">
 </p>
 
 ### Web
 
 <p align="center">
-  <img src="img/Web.png" width="80%" alt="Task Manager App - Web">
+  <img src="img/Web.png" width="80%" alt="Task Manager App - Web" style="border-radius: 10px;">
 </p>
 
 ### Screen Recordings (GIFs)
 
 <p align="center">
-  <img src="img/ios.gif" alt="Task Manager App - iOS" width="47%">
-  <img src="img/android.gif" alt="Task Manager App - Android" width="46%">
+  <img src="img/ios.gif" alt="Task Manager App - iOS" width="47%" style="border-radius: 10px;">
+  <img src="img/android.gif" alt="Task Manager App - Android" width="47%" style="border-radius: 10px;">
 </p>
 
 ## Features
