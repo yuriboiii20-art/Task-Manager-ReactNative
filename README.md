@@ -12,6 +12,10 @@
 [![React Native Chart Kit](https://img.shields.io/badge/React_Native_Chart_Kit-6.12.0-blue.svg)](https://www.npmjs.com/package/react-native-chart-kit)
 [![MIT License](https://img.shields.io/badge/License-MIT-orange.svg)](LICENSE)
 
+<p align="center">
+  <img src="img/logo.png" width="50%" alt="TaskNexus Logo" style="border-radius: 10px;">
+</p>
+
 ## Table of Contents
 
 - [Overview](#overview)
