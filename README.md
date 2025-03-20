@@ -25,7 +25,9 @@
   - [Web](#web)
   - [Screen Recordings (GIFs)](#screen-recordings-gifs)
 - [Features](#features)
-- [Technical Stack](#technical-stack)
+- [Technical Stack & Libraries](#technical-stack--libraries)
+  - [Core Dependencies](#core-dependencies)
+  - [Third-Party Dependencies](#third-party-dependencies)
 - [Installation & Setup](#installation--setup)
   - [Prerequisites](#prerequisites)
   - [Clone the Repository](#clone-the-repository)
@@ -133,24 +135,34 @@ I hope its name and branding convey a sense of connectivity and organization, wi
 - **Splash Screen:** Custom splash screen with app name and slogan.
 - **Redirection:** Automatically redirects to the home screen after the splash screen (3 seconds).
 
-## Technical Stack
+## Technical Stack & Libraries
 
 TaskNexus is built using a modern tech stack that includes both core and third-party libraries to enhance functionality and user experience. Here are the key components:
 
+### **Core Dependencies:**
 - **React Native:** Core framework for building cross-platform mobile applications.
-- **Expo:** Provides a robust development workflow and build process.
 - **TypeScript:** Enhances code quality with static type checking.
+- **React Context API:** Manages global state for tasks and theme overrides.
 - **React Navigation / Expo Router:** Manages navigation and deep linking.
+- **React Native Gesture Handler:** Enables smooth gesture handling for drag-and-drop functionality.
+- **React Native Reanimated:** Powers animations and transitions for a fluid user experience.
+- **React Native Safe Area:** Ensures proper layout and spacing on devices with notches or rounded corners.
+
+### **Third-Party Dependencies:**
+- **Expo:** Provides a robust development workflow and build process.
+- **Expo Font:** Simplifies font loading and management (custom Google fonts included).
+- **Expo Status Bar:** Customizes the status bar for better aesthetics and user experience.
 - **React Native Paper:** Offers Material Design components and theming.
+- **React Native Vector Icons:** Provides customizable icons for a polished UI.
 - **React Native Chart Kit:** Renders customizable charts (pie, bar, line).
 - **React Native Draggable FlatList:** Enables drag-and-drop reordering of tasks.
 - **React Native DateTime Picker:** Provides a user-friendly date and time selection interface.
-- **Reanimated:** Powers smooth and performant UI animations.
 - **Prettier:** Maintains code quality and consistent formatting.
+
+### **Other:**
 - **JSDoc & TypeScript Definitions:** Documented code for better understanding and type safety.
 - **Google Fonts:** Includes custom Google fonts (Roboto) and images for branding.
 - **Shell Scripts:** Simplify common tasks with custom shell scripts.
-- and many more...
 
 ## Installation & Setup
 
@@ -210,9 +222,7 @@ Then:
 - Use an Android/iOS simulator (remember to press `a` or `i` in the terminal to open the app on Android/iOS, respectively, with the simulator/emulator running), or
 - Open the project in a web browser for a quick preview (remember to press `w` in the terminal, it will then open a new tab in your default browser).
   > Note: The web version may not display correctly on larger screens. Also, some functionalities, like drag-and-drop, date picker, time picker, etc. may not work as expected on the web since they are designed for mobile devices.
-- Enjoy managing your tasks with TaskNexus!
-
----
+- Enjoy managing your tasks with TaskNexus! 🚀
 
 ## Usage Instructions
 
@@ -240,8 +250,6 @@ Then:
 
 - **Automatic Redirection:** The root route ("/") automatically redirects to the home screen.
 - **Fallback:** Invalid routes are handled by the `+not-found` screen (though no such routes are present in the app - it's _technically_ impossible to get lost!).
-
----
 
 ## File Structure
 
