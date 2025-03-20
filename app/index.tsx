@@ -7,6 +7,8 @@ import Animated, {
   withDelay,
 } from "react-native-reanimated";
 import { Redirect } from "expo-router";
+
+// Import custom styles for the splash screen
 import { styles } from "../styles/IndexStyles";
 
 /**

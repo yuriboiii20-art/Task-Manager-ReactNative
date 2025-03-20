@@ -1,4 +1,6 @@
 import React, { createContext, useState, useEffect } from "react";
+
+// Import types for the Task context for typing consistency
 import { Task } from "../types/types";
 
 /**
