@@ -135,7 +135,7 @@ I hope its name and branding convey a sense of connectivity and organization, wi
 
 ## Technical Stack
 
-TaskNexus is built using a modern tech stack that includes:
+TaskNexus is built using a modern tech stack that includes both core and third-party libraries to enhance functionality and user experience. Here are the key components:
 
 - **React Native:** Core framework for building cross-platform mobile applications.
 - **Expo:** Provides a robust development workflow and build process.
