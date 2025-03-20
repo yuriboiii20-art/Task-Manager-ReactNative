@@ -148,7 +148,7 @@ TaskNexus is built using a modern tech stack that includes both core and third-p
 - **Reanimated:** Powers smooth and performant UI animations.
 - **Prettier:** Maintains code quality and consistent formatting.
 - **JSDoc & TypeScript Definitions:** Documented code for better understanding and type safety.
-- **Custom Fonts & Images:** Includes custom fonts (Roboto) and images for branding.
+- **Google Fonts:** Includes custom Google fonts (Roboto) and images for branding.
 - **Shell Scripts:** Simplify common tasks with custom shell scripts.
 - and many more...
 

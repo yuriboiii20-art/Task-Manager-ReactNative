@@ -1,6 +1,8 @@
 import React from "react";
 import { View, Text } from "react-native";
 import { Link } from "expo-router";
+
+// Import custom styles for the NotFound component
 import { styles } from "../styles/NotFoundStyles";
 
 /**

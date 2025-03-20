@@ -1,8 +1,6 @@
 import React, { useContext, useEffect } from "react";
 import { View, Dimensions, ScrollView, Platform } from "react-native";
 import { Text, Card, useTheme } from "react-native-paper";
-import Chart from "../../components/Chart";
-import { TaskContext } from "../../contexts/TaskContext";
 import Animated, {
   useSharedValue,
   useAnimatedStyle,
@@ -11,9 +9,11 @@ import Animated, {
   SlideInDown,
 } from "react-native-reanimated";
 
-// Import custom styles and hooks
+// Import custom styles and hooks and TaskContext for task management
 import { styles } from "../../styles/StatsScreenStyles";
 import usePrevious from "../../hooks/usePrevious";
+import Chart from "../../components/Chart";
+import { TaskContext } from "../../contexts/TaskContext";
 
 // Animated ScrollView component - for smooth background transitions
 const AnimatedScrollView = Animated.createAnimatedComponent(ScrollView);

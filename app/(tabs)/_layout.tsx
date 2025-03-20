@@ -1,5 +1,7 @@
 import React from "react";
 import { Tabs } from "expo-router";
+
+// Import the custom tab bar component for styling and functionality
 import CustomTabBar from "../../components/CustomTabBar";
 
 /**
