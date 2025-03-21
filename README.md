@@ -98,7 +98,7 @@ I hope its name and branding convey a sense of connectivity and organization, wi
 ### Screen Recordings (GIFs)
 
 <p align="center">
-  <img src="img/ios.gif" alt="Task Manager App - iOS" width="47%" style="border-radius: 10px;">
+  <img src="img/ios.gif" alt="Task Manager App - iOS" width="48%" style="border-radius: 10px;">
   <img src="img/android.gif" alt="Task Manager App - Android" width="47%" style="border-radius: 10px;">
 </p>
 
