@@ -1,0 +1,9 @@
+source 'https://rubygems.org'
+ruby '3.1.0'
+
+gem 'sinatra',      require: 'sinatra/base'
+gem 'mongoid',      '~> 7.3'
+gem 'jwt'
+gem 'bcrypt'
+gem 'rack-cors'
+gem 'json'
