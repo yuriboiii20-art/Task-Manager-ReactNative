@@ -1,173 +1,431 @@
-import React, { createContext, useState, useEffect } from "react";
+import React, {
+  createContext,
+  FC,
+  ReactNode,
+  useState,
+  useEffect,
+  useCallback,
+} from "react";
+import { supabase } from "../lib/supabaseClient";
+import { z } from "zod";
+import type { RealtimeChannel } from "@supabase/supabase-js";
 
-// Import types for the Task context for typing consistency
-import { Task } from "../types/types";
+//
+// 1. Zod schema for validating raw Task rows from Supabase
+//
+const TaskDBSchema = z.object({
+  id: z.number(),
+  user_id: z.string(),
+  text: z.string(),
+  color: z.string(),
+  due_date: z.string(),
+  completed: z.boolean(),
+  inserted_at: z.string(),
+  updated_at: z.string(),
+});
+type RawTask = z.infer<typeof TaskDBSchema>;
 
-/**
- * Interface for the TaskContext value.
- * Contains the tasks state and functions to manage tasks.
- */
-interface TaskContextValue {
-  tasks: Task[]; // Centralized state for tasks to share with the entire app
-  addTask: (text: string, color: string, dueDate: Date) => void;
-  toggleTask: (id: number) => void;
-  deleteTask: (id: number) => void;
-  reorderTasks: (data: Task[]) => void;
-  editTask: (
+//
+// 2. In-app Task type with Date objects
+//
+export type Task = {
+  id: number;
+  user_id: string;
+  text: string;
+  color: string;
+  dueDate: Date;
+  completed: boolean;
+  insertedAt: Date;
+  updatedAt: Date;
+};
+
+//
+// 3. Context value interface
+//
+export interface TaskContextValue {
+  user: { id: string; email: string } | null;
+  tasks: Task[];
+  loading: boolean;
+  signUp(email: string, password: string): Promise<void>;
+  signIn(email: string, password: string): Promise<void>;
+  signOut(): Promise<void>;
+  addTask(text: string, color: string, dueDate: Date): Promise<void>;
+  toggleTask(id: number): Promise<void>;
+  deleteTask(id: number): Promise<void>;
+  editTask(
     id: number,
-    newText: string,
-    newColor: string,
-    newDueDate: Date,
-  ) => void;
+    text: string,
+    color: string,
+    dueDate: Date,
+  ): Promise<void>;
+  reorderTasks(data: Task[]): void;
+  fetchTasks(): Promise<void>;
 }
 
-/**
- * Create a context for managing tasks, with default values.
- */
-export const TaskContext = createContext<TaskContextValue>({
-  tasks: [],
-  addTask: () => {},
-  toggleTask: () => {},
-  deleteTask: () => {},
-  reorderTasks: () => {},
-  editTask: () => {},
-});
+export const TaskContext = createContext<TaskContextValue>(
+  {} as TaskContextValue,
+);
 
-/**
- * Reorders tasks based on their completion status.
- * Completed tasks are ALWAYS moved to the end of the list.
- *
- * @param list - The array of tasks to reorder.
- * @returns A new array of tasks sorted by completion status.
- */
-function reorderTasksAlg(list: Task[]) {
+//
+// 4. Utility: push completed tasks to the end
+//
+function reorderTasksAlg(list: Task[]): Task[] {
   return [...list].sort((a, b) =>
     a.completed === b.completed ? 0 : a.completed ? 1 : -1,
   );
 }
 
-/**
- * TaskProvider component provides the TaskContext to its children
- * and manages the state of tasks, including adding, toggling, deleting,
- * editing, and reordering tasks.
- */
-export function TaskProvider({ children }: { children: React.ReactNode }) {
+//
+// 5. Provider component
+//
+export const TaskProvider: FC<{ children: ReactNode }> = ({ children }) => {
+  const [user, setUser] = useState<{ id: string; email: string } | null>(null);
   const [tasks, setTasks] = useState<Task[]>([]);
+  const [loading, setLoading] = useState<boolean>(true);
+  const [channel, setChannel] = useState<RealtimeChannel | null>(null);
 
-  // Example tasks - inserted when the app is first loaded
+  //
+  // 5.1 Auth state
+  //
   useEffect(() => {
-    const initial: Task[] = [
-      {
-        id: 1,
-        text: "Implement advanced feature",
-        color: "#ffffff",
-        dueDate: new Date("2025-03-19"),
-        completed: false,
+    console.log("[TaskContext] Initializing auth listener");
+    supabase.auth.getSession().then(({ data: { session } }) => {
+      console.log("[TaskContext] Existing session:", session);
+      if (session?.user) {
+        setUser({ id: session.user.id, email: session.user.email! });
+      }
+    });
+    const { data: listener } = supabase.auth.onAuthStateChange(
+      (_event, session) => {
+        console.log("[TaskContext] Auth state changed:", session);
+        if (session?.user) {
+          setUser({ id: session.user.id, email: session.user.email! });
+        } else {
+          setUser(null);
+          setTasks([]);
+        }
       },
-      {
-        id: 2,
-        text: "Fix critical bug #42",
-        color: "#ffe4b5",
-        dueDate: new Date("2025-04-12"),
-        completed: false,
-      },
-      {
-        id: 3,
-        text: "Prepare for the upcoming presentation",
-        color: "#ffcccb",
-        dueDate: new Date("2025-04-11"),
-        completed: false,
-      },
-      {
-        id: 4,
-        text: "Conduct code review for PR #123",
-        color: "#b0e0e6",
-        dueDate: new Date("2025-04-10"),
-        completed: false,
-      },
-      {
-        id: 5,
-        text: "Update documentation for the new API",
-        color: "#90ee90",
-        dueDate: new Date("2025-05-09"),
-        completed: false,
-      },
-      {
-        id: 6,
-        text: "Plan the next sprint",
-        color: "#cccccc",
-        dueDate: new Date("2025-05-15"),
-        completed: false,
-      },
-    ];
-    setTasks(reorderTasksAlg(initial));
+    );
+    return () => {
+      listener.subscription.unsubscribe();
+    };
   }, []);
 
-  /**
-   * Adds a new task to the tasks state.
-   */
-  const addTask = (text: string, color: string, dueDate: Date) => {
-    const newTask: Task = {
-      id: Date.now(),
-      text,
-      color,
-      dueDate,
-      completed: false,
+  //
+  // 5.2.1 Fetch tasks – extracted so it can be reused manually
+  //
+  const fetchTasks = useCallback(async () => {
+    if (!user) return;
+    setLoading(true);
+    const { data, error } = await supabase
+      .from("tasks")
+      .select("*")
+      .order("due_date", { ascending: true });
+
+    if (error) {
+      console.error("[TaskContext] fetchTasks error", error);
+    } else if (data) {
+      const parsed = (data as RawTask[]).map((raw) => {
+        const v = TaskDBSchema.parse(raw);
+        return {
+          id: v.id,
+          user_id: v.user_id,
+          text: v.text,
+          color: v.color,
+          dueDate: new Date(v.due_date),
+          completed: v.completed,
+          insertedAt: new Date(v.inserted_at),
+          updatedAt: new Date(v.updated_at),
+        } as Task;
+      });
+      setTasks(reorderTasksAlg(parsed));
+    }
+    setLoading(false);
+  }, [user]);
+
+  //
+  // 5.2 Fetch + realtime
+  //
+  useEffect(() => {
+    console.log("[TaskContext] User effect triggered, user =", user);
+    if (channel) {
+      console.log("[TaskContext] Removing old channel");
+      supabase.removeChannel(channel);
+      setChannel(null);
+    }
+
+    if (!user) {
+      console.log("[TaskContext] No user, skipping fetch");
+      setLoading(false);
+      return;
+    }
+
+    // fetch once for this user
+    fetchTasks();
+
+    // 5.2.2 Subscribe to realtime changes
+    console.log("[TaskContext] Subscribing to realtime for user", user.id);
+    const chan = supabase
+      .channel(`tasks-user-${user.id}`)
+      .on(
+        "postgres_changes",
+        {
+          event: "*",
+          schema: "public",
+          table: "tasks",
+          filter: `user_id=eq.${user.id}`,
+        },
+        (payload) => {
+          console.log("[TaskContext] Realtime payload:", payload);
+          const { eventType, new: newRec, old: oldRec } = payload;
+
+          if (eventType === "INSERT" && newRec) {
+            try {
+              const v = TaskDBSchema.parse(newRec as RawTask);
+              const t: Task = {
+                id: v.id,
+                user_id: v.user_id,
+                text: v.text,
+                color: v.color,
+                dueDate: new Date(v.due_date),
+                completed: v.completed,
+                insertedAt: new Date(v.inserted_at),
+                updatedAt: new Date(v.updated_at),
+              };
+
+              // filter out any existing task with the same id, then append
+              setTasks((old) =>
+                reorderTasksAlg([...old.filter((x) => x.id !== t.id), t]),
+              );
+            } catch (e) {
+              console.error("[TaskContext] INSERT parse error", e);
+            }
+          }
+
+          if (eventType === "UPDATE" && newRec) {
+            try {
+              const v = TaskDBSchema.parse(newRec as RawTask);
+              setTasks((old) =>
+                reorderTasksAlg(
+                  old.map((t) =>
+                    t.id === v.id
+                      ? {
+                          id: v.id,
+                          user_id: v.user_id,
+                          text: v.text,
+                          color: v.color,
+                          dueDate: new Date(v.due_date),
+                          completed: v.completed,
+                          insertedAt: new Date(v.inserted_at),
+                          updatedAt: new Date(v.updated_at),
+                        }
+                      : t,
+                  ),
+                ),
+              );
+            } catch (e) {
+              console.error("[TaskContext] UPDATE parse error", e);
+            }
+          }
+
+          if (eventType === "DELETE" && oldRec) {
+            try {
+              // Validate and parse the “old” record
+              const v = TaskDBSchema.parse(oldRec as RawTask);
+              // Remove the deleted task and reapply sorting
+              setTasks((old) =>
+                reorderTasksAlg(old.filter((t) => t.id !== v.id)),
+              );
+            } catch (e) {
+              console.error("[TaskContext] DELETE parse error", e);
+            }
+          }
+        },
+      )
+      .subscribe();
+
+    setChannel(chan);
+
+    return () => {
+      console.log("[TaskContext] Unsubscribing channel");
+      supabase.removeChannel(chan);
     };
-    setTasks((prev) => reorderTasksAlg([newTask, ...prev]));
+  }, [user, fetchTasks]);
+
+  //
+  // 6. Auth helpers
+  //
+  const signUp = async (email: string, password: string) => {
+    console.log("[TaskContext] signUp", email);
+    const { data, error } = await supabase.auth.signUp({ email, password });
+    if (error) {
+      console.error("[TaskContext] signUp error", error);
+      throw error;
+    }
+    if (data.user) {
+      setUser({ id: data.user.id, email: data.user.email! });
+    }
   };
 
-  /**
-   * Toggles the completion status of a task by its ID.
-   */
-  const toggleTask = (id: number) => {
-    setTasks((prev) => {
-      const next = prev.map((t) =>
-        t.id === id ? { ...t, completed: !t.completed } : t,
-      );
-      return reorderTasksAlg(next);
+  const signIn = async (email: string, password: string) => {
+    console.log("[TaskContext] signIn", email);
+    const { data, error } = await supabase.auth.signInWithPassword({
+      email,
+      password,
     });
+    if (error) {
+      console.error("[TaskContext] signIn error", error);
+      throw error;
+    }
+    if (data.user) {
+      setUser({ id: data.user.id, email: data.user.email! });
+    }
   };
 
-  /**
-   * Deletes a task by its ID.
-   */
-  const deleteTask = (id: number) => {
-    setTasks((prev) => prev.filter((t) => t.id !== id));
+  const signOut = async () => {
+    console.log("[TaskContext] signOut");
+    const { error } = await supabase.auth.signOut();
+    if (error) {
+      console.error("[TaskContext] signOut error", error);
+      throw error;
+    }
+    setUser(null);
+    setTasks([]);
   };
 
-  /**
-   * Reorders the tasks based on their completion status.
-   */
+  //
+  // 7. CRUD methods (with logs)
+  //
+  const addTask = async (text: string, color: string, dueDate: Date) => {
+    console.log("[TaskContext] addTask", { text, color, dueDate });
+    if (!user) {
+      throw new Error("Not authenticated");
+    }
+    const { data, error } = await supabase
+      .from("tasks")
+      .insert({
+        user_id: user.id,
+        text,
+        color,
+        due_date: dueDate.toISOString(),
+      })
+      .select("*")
+      .single();
+    console.log("[TaskContext] addTask result", { data, error });
+    if (error) throw error;
+    const v = TaskDBSchema.parse(data as RawTask);
+    const newTask: Task = {
+      id: v.id,
+      user_id: v.user_id,
+      text: v.text,
+      color: v.color,
+      dueDate: new Date(v.due_date),
+      completed: v.completed,
+      insertedAt: new Date(v.inserted_at),
+      updatedAt: new Date(v.updated_at),
+    };
+    setTasks((old) => reorderTasksAlg([...old, newTask]));
+  };
+
+  const toggleTask = async (id: number) => {
+    console.log("[TaskContext] toggleTask", id);
+    const t = tasks.find((x) => x.id === id);
+    if (!t) return;
+    const { data, error } = await supabase
+      .from("tasks")
+      .update({ completed: !t.completed })
+      .eq("id", id)
+      .select("*")
+      .single();
+    console.log("[TaskContext] toggleTask result", { data, error });
+    if (error) throw error;
+    const v = TaskDBSchema.parse(data as RawTask);
+    setTasks((old) =>
+      reorderTasksAlg(
+        old.map((x) =>
+          x.id === id
+            ? {
+                ...x,
+                completed: v.completed,
+                updatedAt: new Date(v.updated_at),
+              }
+            : x,
+        ),
+      ),
+    );
+  };
+
+  const deleteTask = async (id: number) => {
+    console.log("[TaskContext] deleteTask", id);
+    const { error } = await supabase.from("tasks").delete().eq("id", id);
+    console.log("[TaskContext] deleteTask error", error);
+    if (error) throw error;
+    setTasks((old) => old.filter((x) => x.id !== id));
+  };
+
+  const editTask = async (
+    id: number,
+    text: string,
+    color: string,
+    dueDate: Date,
+  ) => {
+    console.log("[TaskContext] editTask", { id, text, color, dueDate });
+    const { data, error } = await supabase
+      .from("tasks")
+      .update({
+        text,
+        color,
+        due_date: dueDate.toISOString(),
+      })
+      .eq("id", id)
+      .select("*")
+      .single();
+    console.log("[TaskContext] editTask result", { data, error });
+    if (error) throw error;
+    const v = TaskDBSchema.parse(data as RawTask);
+    setTasks((old) =>
+      reorderTasksAlg(
+        old.map((x) =>
+          x.id === id
+            ? {
+                ...x,
+                text: v.text,
+                color: v.color,
+                dueDate: new Date(v.due_date),
+                updatedAt: new Date(v.updated_at),
+              }
+            : x,
+        ),
+      ),
+    );
+  };
+
   const reorderTasks = (data: Task[]) => {
+    console.log("[TaskContext] reorderTasks", data);
     setTasks(reorderTasksAlg(data));
   };
 
-  /**
-   * Edits an existing task, updating its text, color, and due date.
-   */
-  const editTask = (
-    id: number,
-    newText: string,
-    newColor: string,
-    newDueDate: Date,
-  ) => {
-    setTasks((prev) => {
-      const next = prev.map((t) =>
-        t.id === id
-          ? { ...t, text: newText, color: newColor, dueDate: newDueDate }
-          : t,
-      );
-      return reorderTasksAlg(next);
-    });
-  };
-
-  // Provide the TaskContext value to its children
+  //
+  // 8. Provide context
+  //
   return (
     <TaskContext.Provider
-      value={{ tasks, addTask, toggleTask, deleteTask, reorderTasks, editTask }}
+      value={{
+        user,
+        tasks,
+        loading,
+        signUp,
+        signIn,
+        signOut,
+        addTask,
+        toggleTask,
+        deleteTask,
+        editTask,
+        reorderTasks,
+        fetchTasks,
+      }}
     >
       {children}
     </TaskContext.Provider>
   );
-}
+};

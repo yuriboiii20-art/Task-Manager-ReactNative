@@ -1,0 +1,21 @@
+{
+  "name": "TaskNexus Dev Container",
+  "context": "..",
+  "dockerFile": "Dockerfile",
+  "runArgs": ["--init"],
+  "settings": {
+    "terminal.integrated.shell.linux": "/bin/bash",
+    "editor.formatOnSave": true,
+    "eslint.validate": ["javascript", "typescript", "typescriptreact"]
+  },
+  "forwardPorts": [19000, 19001, 19002, 8081],
+  "postCreateCommand": "yarn install",
+  "extensions": [
+    "esbenp.prettier-vscode",
+    "dbaeumer.vscode-eslint",
+    "hashicorp.terraform",
+    "ms-azuretools.vscode-docker",
+    "amazonwebservices.aws-toolkit-vscode"
+  ],
+  "remoteUser": "vscode"
+}

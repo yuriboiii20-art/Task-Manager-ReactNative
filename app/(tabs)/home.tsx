@@ -13,6 +13,7 @@ import Animated, {
   withTiming,
   interpolateColor,
 } from "react-native-reanimated";
+import { withAuth } from "../../components/withAuth";
 
 // Import custom components and contexts
 import TaskItem from "../../components/TaskItem";
@@ -39,7 +40,7 @@ function getGreeting() {
  * Delegates task management to the TaskContext, which provides functions for adding,
  * editing, toggling, deleting, and reordering tasks, following the Delegate design pattern.
  */
-export default function HomeScreen() {
+function HomeScreen() {
   // Get task data and functions from TaskContext
   const { tasks, addTask, editTask, toggleTask, deleteTask, reorderTasks } =
     useContext(TaskContext);
@@ -154,37 +155,63 @@ export default function HomeScreen() {
           Add Task
         </Button>
 
-        <DraggableFlatList
-          data={tasks}
-          keyExtractor={(item) => item.id.toString()}
-          renderItem={({ item, drag, isActive }) => (
-            <ScaleDecorator>
-              <Animated.View
-                style={[{ overflow: "visible", zIndex: isActive ? 9999 : 0 }]}
-                entering={SlideInDown}
-                exiting={SlideOutUp}
-                layout={Layout.springify()}
-              >
-                <TaskItem
-                  task={item}
-                  onToggleComplete={toggleTask}
-                  onDelete={deleteTask}
-                  drag={drag}
-                  onEdit={handleEditTask}
-                />
-              </Animated.View>
-            </ScaleDecorator>
-          )}
-          onDragEnd={onDragEnd}
-          dragItemOverflow={true}
-          removeClippedSubviews={false}
-          style={{ overflow: "visible" }}
-          contentContainerStyle={{
-            flexGrow: 1,
-            overflow: "visible",
-            marginTop: 16,
-          }}
-        />
+        {/* If there are no tasks yet, invite the user to add one */}
+        {tasks.length === 0 ? (
+          <View
+            style={{
+              flex: 1,
+              alignItems: "center",
+              justifyContent: "center",
+              padding: 24,
+            }}
+          >
+            <Text
+              style={{
+                color: colors.onBackground,
+                fontSize: 16,
+                textAlign: "center",
+              }}
+            >
+              You have no tasks yet!{"\n"}Tap "Add Task" above to create your
+              first task.
+            </Text>
+          </View>
+        ) : (
+          <DraggableFlatList
+            data={tasks}
+            keyExtractor={(item) => item.id.toString()}
+            renderItem={({ item, drag, isActive }) => (
+              <ScaleDecorator>
+                <Animated.View
+                  style={{
+                    overflow: "visible",
+                    zIndex: isActive ? 9999 : 0,
+                  }}
+                  entering={SlideInDown}
+                  exiting={SlideOutUp}
+                  layout={Layout.springify()}
+                >
+                  <TaskItem
+                    task={item}
+                    onToggleComplete={toggleTask}
+                    onDelete={deleteTask}
+                    drag={drag}
+                    onEdit={handleEditTask}
+                  />
+                </Animated.View>
+              </ScaleDecorator>
+            )}
+            onDragEnd={onDragEnd}
+            dragItemOverflow={true}
+            removeClippedSubviews={false}
+            style={{ overflow: "visible" }}
+            contentContainerStyle={{
+              flexGrow: 1,
+              overflow: "visible",
+              marginTop: 16,
+            }}
+          />
+        )}
 
         <TaskAddModal
           visible={modalVisible}
@@ -195,3 +222,5 @@ export default function HomeScreen() {
     </TouchableWithoutFeedback>
   );
 }
+
+export default withAuth(HomeScreen);
