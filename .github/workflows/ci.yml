@@ -176,7 +176,7 @@ jobs:
       - name: Build & push Ruby image
         uses: docker/build-push-action@v5
         with:
-          context: .
+          context: ./ruby
           file: ./ruby/Dockerfile
           push: true
           tags: |
@@ -203,3 +203,10 @@ jobs:
 
       - name: Announce deployment
         run: echo "✅ Deployment complete!"
+
+  done:
+    name: "🎉 Pipeline Done"
+    needs: [ deploy ]
+    runs-on: ubuntu-latest
+    steps:
+      - run: echo "✅ CI/CD pipeline completed successfully."
