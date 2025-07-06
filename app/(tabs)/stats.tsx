@@ -8,6 +8,7 @@ import Animated, {
   interpolateColor,
   SlideInDown,
 } from "react-native-reanimated";
+import { withAuth } from "../../components/withAuth";
 
 // Import custom styles and hooks and TaskContext for task management
 import { styles } from "../../styles/StatsScreenStyles";
@@ -24,7 +25,7 @@ const AnimatedScrollView = Animated.createAnimatedComponent(ScrollView);
  *
  * A nice-to-have enhancement for the app!
  */
-export default function StatsScreen() {
+function StatsScreen() {
   const { tasks } = useContext(TaskContext);
   const { colors } = useTheme();
 
@@ -297,3 +298,5 @@ export default function StatsScreen() {
     </AnimatedScrollView>
   );
 }
+
+export default withAuth(StatsScreen);

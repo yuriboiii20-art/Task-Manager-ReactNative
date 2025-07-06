@@ -1,16 +1,43 @@
 # TaskNexus - Task Manager React Native App 📱
 
-[![Project Version](https://img.shields.io/badge/Version-1.0.0-blue.svg)](package.json)
-[![React Native](https://img.shields.io/badge/React_Native-0.76.7-blue?logo=react)](https://reactnative.dev/)
-[![Expo](https://img.shields.io/badge/Expo-~52.0.38-blue?logo=expo)](https://expo.dev/)
-[![Node.js](https://img.shields.io/badge/Node.js-14.x-blue?logo=node.js)](https://nodejs.org/)
-[![TypeScript](https://img.shields.io/badge/TypeScript-%5E5.3.3-blue?logo=typescript)](https://www.typescriptlang.org/)
-[![Node Package Manager](https://img.shields.io/badge/npm-7.x-blue?logo=npm)](https://www.npmjs.com/)
-[![Yarn](https://img.shields.io/badge/Yarn-1.22.x-blue?logo=yarn)](https://yarnpkg.com/)
-[![Prettier](https://img.shields.io/badge/Prettier-3.5.3-blue?logo=prettier)](https://prettier.io/)
-[![React Native Paper](https://img.shields.io/badge/React_Native_Paper-5.13.1-blue.svg)](https://callstack.github.io/react-native-paper/)
-[![React Native Chart Kit](https://img.shields.io/badge/React_Native_Chart_Kit-6.12.0-blue.svg)](https://www.npmjs.com/package/react-native-chart-kit)
-[![MIT License](https://img.shields.io/badge/License-MIT-orange.svg)](LICENSE)
+<p align="center">
+  <!-- Core -->
+  <img src="https://img.shields.io/badge/React_Native-red?style=for-the-badge&logo=react&logoColor=white" alt="React Native" />
+  <img src="https://img.shields.io/badge/Expo-000020?style=for-the-badge&logo=expo&logoColor=white" alt="Expo" />
+  <img src="https://img.shields.io/badge/Node.js-339933?style=for-the-badge&logo=node.js&logoColor=white" alt="Node.js" />
+  <img src="https://img.shields.io/badge/TypeScript-3178C6?style=for-the-badge&logo=typescript&logoColor=white" alt="TypeScript" />
+  <img src="https://img.shields.io/badge/JavaScript-F7DF1E?style=for-the-badge&logo=javascript&logoColor=black" alt="JavaScript" />
+  <img src="https://img.shields.io/badge/React_Context-teal?style=for-the-badge&logo=react&logoColor=white" alt="React Context" />
+  <img src="https://img.shields.io/badge/npm-CB3837?style=for-the-badge&logo=npm&logoColor=white" alt="npm" />
+  <img src="https://img.shields.io/badge/Yarn-2C8EBB?style=for-the-badge&logo=yarn&logoColor=white" alt="Yarn" />
+
+  <!-- UI & Charts -->
+  <img src="https://img.shields.io/badge/React_Native_Paper-6200EE?style=for-the-badge&logo=react&logoColor=white" alt="React Native Paper" />
+  <img src="https://img.shields.io/badge/Chart_Kit-FF6384?style=for-the-badge&logo=chartdotjs&logoColor=white" alt="React Native Chart Kit" />
+
+  <!-- Backend & Data -->
+  <img src="https://img.shields.io/badge/Supabase-3ECF8E?style=for-the-badge&logo=supabase&logoColor=white" alt="Supabase" />
+  <img src="https://img.shields.io/badge/PostgreSQL-336791?style=for-the-badge&logo=postgresql&logoColor=white" alt="PostgreSQL" />
+
+  <!-- DevOps -->
+  <img src="https://img.shields.io/badge/Docker-2496ED?style=for-the-badge&logo=docker&logoColor=white" alt="Docker" />
+  <img src="https://img.shields.io/badge/GitHub_Actions-2088FF?style=for-the-badge&logo=githubactions&logoColor=white" alt="GitHub Actions" />
+  <img src="https://img.shields.io/badge/Amazon_Web_Services-232F3E?style=for-the-badge&logo=task&logoColor=white" alt="AWS" />
+  <img src="https://img.shields.io/badge/Vercel-000000?style=for-the-badge&logo=vercel&logoColor=white" alt="Vercel" />
+  <img src="https://img.shields.io/badge/GitHub_Container_Registry-2088FF?style=for-the-badge&logo=github&logoColor=white" alt="GitHub Container Registry" />
+
+  <!-- Testing -->
+  <img src="https://img.shields.io/badge/Jest-C21325?style=for-the-badge&logo=jest&logoColor=white" alt="Jest" />
+  <img src="https://img.shields.io/badge/React_Testing_Library-FF4785?style=for-the-badge&logo=testinglibrary&logoColor=white" alt="React Testing Library" />
+
+  <!-- Backup Optional Backend -->
+  <img src="https://img.shields.io/badge/Ruby_on_Rails-CC0000?style=for-the-badge&logo=ruby&logoColor=white" alt="Ruby on Rails" />
+
+  <!-- Code Quality & Misc -->
+  <img src="https://img.shields.io/badge/Babel-FFCA28?style=for-the-badge&logo=babel&logoColor=white" alt="Babel" />
+  <img src="https://img.shields.io/badge/Prettier-pink?style=for-the-badge&logo=prettier&logoColor=white" alt="Prettier" />
+  <img src="https://img.shields.io/badge/ESLint-4B32C3?style=for-the-badge&logo=eslint&logoColor=white" alt="ESLint" />
+</p>
 
 <p align="center">
   <img src="img/logo.png" width="50%" alt="TaskNexus Logo" style="border-radius: 10px;">
@@ -37,7 +64,6 @@
 - [File Structure](#file-structure)
 - [Scripts & Tools](#scripts--tools)
 - [Known Issue](#known-issue)
-- [Future Enhancements](#future-enhancements)
 - [License](#license)
 - [Contact](#contact)
 
@@ -327,23 +353,6 @@ Task-Manager-ReactNative
   - If given more time, I would explore alternative libraries or custom implementations to achieve a smoother drag-and-drop experience.
   - For now, the app remains fully functional, and users can still drag and drop tasks without any issues.
   - The app is designed to be user-friendly, and this minor visual glitch does not hinder the overall experience.
-
-## Future Enhancements
-
-Currently, the app provides essential task management features with a focus on simplicity and usability.
-In the near future, if I have more time, I would love to implement the following features that I have in mind:
-
-- **User Authentication:** Implement user authentication for personalized task management.
-  - This would enable cloud storage/synchronization for tasks and user-specific settings. It would also allow multiple users to use the app on the same device.
-- **Task Categories:** Add categories for tasks to organize them better.
-- **Task Reminders:** Include reminders for tasks with notifications.
-- **Task Sharing:** Enable task sharing with other users.
-- **Task Search & Filtering:** Implement search and filter options for tasks.
-- **Task Priority:** Add priority levels for tasks.
-- **Enhanced Branding:** Improve the app's branding with a custom logo, color scheme, and typography, in line with the TaskNexus theme.
-
-These features would make TaskNexus similar to another app of mine - [CollabNote](https://github.com/hoangsonww/CollabNote-Fullstack-App),
-which is a full-stack web application for collaborative note-taking with user authentication, real-time updates, and more - but in a mobile app format.
 
 ## License
 

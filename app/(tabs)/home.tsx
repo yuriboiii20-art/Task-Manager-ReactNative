@@ -13,6 +13,7 @@ import Animated, {
   withTiming,
   interpolateColor,
 } from "react-native-reanimated";
+import { withAuth } from "../../components/withAuth";
 
 // Import custom components and contexts
 import TaskItem from "../../components/TaskItem";
@@ -39,7 +40,7 @@ function getGreeting() {
  * Delegates task management to the TaskContext, which provides functions for adding,
  * editing, toggling, deleting, and reordering tasks, following the Delegate design pattern.
  */
-export default function HomeScreen() {
+function HomeScreen() {
   // Get task data and functions from TaskContext
   const { tasks, addTask, editTask, toggleTask, deleteTask, reorderTasks } =
     useContext(TaskContext);
@@ -195,3 +196,5 @@ export default function HomeScreen() {
     </TouchableWithoutFeedback>
   );
 }
+
+export default withAuth(HomeScreen);
