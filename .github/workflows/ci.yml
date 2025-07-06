@@ -11,7 +11,7 @@ jobs:
     name: 🛠️ Setup
     runs-on: ubuntu-latest
     outputs:
-      cache-key: ${{ steps.cache-node.outputs.cache-key }}
+      cache-hit: ${{ steps.cache-node.outputs.cache-hit }}
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
@@ -50,7 +50,7 @@ jobs:
         uses: actions/cache@v3
         with:
           path: ~/.npm
-          key: ${{ needs.setup.outputs.cache-key }}
+          key: ${{ needs.setup.outputs.cache-hit }}
           restore-keys: |
             ${{ runner.os }}-node-
 
