@@ -51,6 +51,11 @@ describe("TaskAddModal implementation", () => {
     );
   });
 
+  it("includes a DateTimePicker for date and time selection", () => {
+    expect(src).toMatch(/<DateTimePicker[^>]*mode="date"/);
+    expect(src).toMatch(/<DateTimePicker[^>]*mode="time"/);
+  });
+
   it('has a ContentWrapper that branches on Platform.OS === "web"', () => {
     expect(src).toMatch(/Platform\.OS === "web"/);
     expect(src).toMatch(

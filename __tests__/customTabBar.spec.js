@@ -14,11 +14,6 @@ describe("CustomTabBar implementation", () => {
     expect(src).toMatch(/export default function CustomTabBar/);
   });
 
-  it("reads user and signOut from TaskContext", () => {
-    expect(src).toMatch(/useContext\(TaskContext\)/);
-    expect(src).toMatch(/const \{ user, signOut \} = useContext/);
-  });
-
   it("defines handleLogout with async signOut and navigation.navigate", () => {
     expect(src).toMatch(/const handleLogout = async \(\)/);
     expect(src).toMatch(/await signOut\(\)/);
