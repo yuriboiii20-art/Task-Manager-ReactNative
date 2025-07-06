@@ -4,6 +4,7 @@ import React, {
   ReactNode,
   useState,
   useEffect,
+  useCallback,
 } from "react";
 import { supabase } from "../lib/supabaseClient";
 import { z } from "zod";
@@ -58,6 +59,7 @@ export interface TaskContextValue {
     dueDate: Date,
   ): Promise<void>;
   reorderTasks(data: Task[]): void;
+  fetchTasks(): Promise<void>;
 }
 
 export const TaskContext = createContext<TaskContextValue>(
@@ -110,6 +112,38 @@ export const TaskProvider: FC<{ children: ReactNode }> = ({ children }) => {
   }, []);
 
   //
+  // 5.2.1 Fetch tasks – extracted so it can be reused manually
+  //
+  const fetchTasks = useCallback(async () => {
+    if (!user) return;
+    setLoading(true);
+    const { data, error } = await supabase
+      .from("tasks")
+      .select("*")
+      .order("due_date", { ascending: true });
+
+    if (error) {
+      console.error("[TaskContext] fetchTasks error", error);
+    } else if (data) {
+      const parsed = (data as RawTask[]).map((raw) => {
+        const v = TaskDBSchema.parse(raw);
+        return {
+          id: v.id,
+          user_id: v.user_id,
+          text: v.text,
+          color: v.color,
+          dueDate: new Date(v.due_date),
+          completed: v.completed,
+          insertedAt: new Date(v.inserted_at),
+          updatedAt: new Date(v.updated_at),
+        } as Task;
+      });
+      setTasks(reorderTasksAlg(parsed));
+    }
+    setLoading(false);
+  }, [user]);
+
+  //
   // 5.2 Fetch + realtime
   //
   useEffect(() => {
@@ -126,38 +160,8 @@ export const TaskProvider: FC<{ children: ReactNode }> = ({ children }) => {
       return;
     }
 
-    setLoading(true);
-    console.log("[TaskContext] Fetching tasks for user", user.id);
-
-    // 5.2.1 Fetch initial tasks
-    (async () => {
-      const { data, error } = await supabase
-        .from("tasks")
-        .select("*")
-        .order("due_date", { ascending: true });
-
-      console.log("[TaskContext] fetchTasks returned:", { data, error });
-
-      if (error) {
-        console.error("[TaskContext] fetchTasks error", error);
-      } else if (data) {
-        const parsed = (data as RawTask[]).map((raw) => {
-          const v = TaskDBSchema.parse(raw);
-          return {
-            id: v.id,
-            user_id: v.user_id,
-            text: v.text,
-            color: v.color,
-            dueDate: new Date(v.due_date),
-            completed: v.completed,
-            insertedAt: new Date(v.inserted_at),
-            updatedAt: new Date(v.updated_at),
-          } as Task;
-        });
-        setTasks(reorderTasksAlg(parsed));
-      }
-      setLoading(false);
-    })();
+    // fetch once for this user
+    fetchTasks();
 
     // 5.2.2 Subscribe to realtime changes
     console.log("[TaskContext] Subscribing to realtime for user", user.id);
@@ -188,7 +192,11 @@ export const TaskProvider: FC<{ children: ReactNode }> = ({ children }) => {
                 insertedAt: new Date(v.inserted_at),
                 updatedAt: new Date(v.updated_at),
               };
-              setTasks((old) => reorderTasksAlg([...old, t]));
+
+              // filter out any existing task with the same id, then append
+              setTasks((old) =>
+                reorderTasksAlg([...old.filter((x) => x.id !== t.id), t]),
+              );
             } catch (e) {
               console.error("[TaskContext] INSERT parse error", e);
             }
@@ -221,9 +229,16 @@ export const TaskProvider: FC<{ children: ReactNode }> = ({ children }) => {
           }
 
           if (eventType === "DELETE" && oldRec) {
-            setTasks((old) =>
-              old.filter((t) => t.id !== (oldRec as RawTask).id),
-            );
+            try {
+              // Validate and parse the “old” record
+              const v = TaskDBSchema.parse(oldRec as RawTask);
+              // Remove the deleted task and reapply sorting
+              setTasks((old) =>
+                reorderTasksAlg(old.filter((t) => t.id !== v.id)),
+              );
+            } catch (e) {
+              console.error("[TaskContext] DELETE parse error", e);
+            }
           }
         },
       )
@@ -235,7 +250,7 @@ export const TaskProvider: FC<{ children: ReactNode }> = ({ children }) => {
       console.log("[TaskContext] Unsubscribing channel");
       supabase.removeChannel(chan);
     };
-  }, [user]);
+  }, [user, fetchTasks]);
 
   //
   // 6. Auth helpers
@@ -407,6 +422,7 @@ export const TaskProvider: FC<{ children: ReactNode }> = ({ children }) => {
         deleteTask,
         editTask,
         reorderTasks,
+        fetchTasks,
       }}
     >
       {children}

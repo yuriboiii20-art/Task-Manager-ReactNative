@@ -25,21 +25,15 @@ export default function CustomTabBar(props: BottomTabBarProps) {
   const { colors } = useTheme();
   const { colorSchemeOverride, setColorSchemeOverride } =
     useContext(ThemeOverrideContext);
-  const { user, signOut } = useContext(TaskContext);
+  const { user, signOut, fetchTasks } = useContext(TaskContext);
 
   // Animate background transitions
   const prevSurface = usePrevious(colors.surface) || colors.surface;
-
-  // Shared value for animation progress
   const progress = useSharedValue(1);
-
-  // Animate progress when colors.surface changes with duration 200ms
   useEffect(() => {
     progress.value = 0;
     progress.value = withTiming(1, { duration: 200 });
   }, [colors.surface]);
-
-  // Animated style that interpolates between the previous and current background color
   const animatedStyle = useAnimatedStyle(() => {
     const bg = interpolateColor(
       progress.value,
@@ -54,6 +48,21 @@ export default function CustomTabBar(props: BottomTabBarProps) {
    */
   const toggleTheme = () => {
     setColorSchemeOverride(colorSchemeOverride === "dark" ? "light" : "dark");
+  };
+
+  /**
+   * handleReload now just re-fetches tasks
+   */
+  const handleReload = async () => {
+    try {
+      await fetchTasks();
+    } catch (e: any) {
+      const err =
+        e.message ||
+        "An error occurred - Could not refresh tasks. Please try again.";
+      if (Platform.OS === "android") ToastAndroid.show(err, ToastAndroid.LONG);
+      else Alert.alert("Error", err);
+    }
   };
 
   /**
@@ -106,14 +115,24 @@ export default function CustomTabBar(props: BottomTabBarProps) {
       {renderTab("stats", "stats-chart", 1)}
 
       {user ? (
-        // If signed in: show logout icon
-        <TouchableOpacity
-          onPress={handleLogout}
-          style={styles.tabButton}
-          activeOpacity={0.8}
-        >
-          <Ionicons name="log-out" size={24} color={colors.onBackground} />
-        </TouchableOpacity>
+        // If signed in: show reload + logout icons
+        <>
+          <TouchableOpacity
+            onPress={handleReload}
+            style={styles.tabButton}
+            activeOpacity={0.8}
+          >
+            <Ionicons name="reload" size={24} color={colors.onBackground} />
+          </TouchableOpacity>
+
+          <TouchableOpacity
+            onPress={handleLogout}
+            style={styles.tabButton}
+            activeOpacity={0.8}
+          >
+            <Ionicons name="log-out" size={24} color={colors.onBackground} />
+          </TouchableOpacity>
+        </>
       ) : (
         // If not signed in: ALWAYS show sign-in and register
         <>

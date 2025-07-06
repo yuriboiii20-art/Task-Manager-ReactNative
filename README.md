@@ -1,5 +1,7 @@
 # TaskNexus - Task Manager React Native App 📱
 
+**Time to get organized!** TaskNexus is a modern, cross-platform task management app built with React Native, Expo, and TypeScript. It allows users to efficiently manage their daily tasks with features like task addition, completion, deletion, drag-and-drop reordering, and interactive statistics visualization.
+
 <p align="center">
   <!-- Core -->
   <img src="https://img.shields.io/badge/React_Native-red?style=for-the-badge&logo=react&logoColor=white" alt="React Native" />
@@ -128,6 +130,9 @@ I hope its name and branding convey a sense of connectivity and organization, wi
   <img src="img/android.gif" alt="Task Manager App - Android" width="47%" style="border-radius: 10px;">
 </p>
 
+> [!IMPORTANT]
+> The above GIFs and images may not fully represent the app's current state, as they were recorded during development. The app has since been updated with new features and improvements. Please clone the repository and run the app to see the latest version in action! 
+
 ## Features
 
 ### Task Management
@@ -135,6 +140,17 @@ I hope its name and branding convey a sense of connectivity and organization, wi
 - **Add, Update & Delete Tasks:** Easily manage your daily tasks through an interactive interface.
 - **Drag-and-Drop Reordering:** Rearrange tasks using a smooth, touch-friendly drag-and-drop mechanism.
 - **Global State Management:** Uses React Context to manage task state across the app for consistent data handling.
+- **Task Completion Toggle:** Mark tasks as complete or incomplete with a simple checkbox interaction.
+- **Task Deletion:** Remove tasks with a dedicated delete action, ensuring a clean task list.
+
+### Cloud Synchronization
+
+- **Supabase Integration:** Utilizes Supabase for real-time data synchronization, ensuring tasks are always up-to-date across devices.
+- **User Authentication:** Supports user authentication with Supabase, allowing users to securely manage their tasks.
+- **Automatic Realtime Synchronization:** Changes made to tasks are instantly reflected across all devices, providing a seamless user experience.
+- **PostgreSQL Database:** Stores tasks in a PostgreSQL database, providing robust data management and querying capabilities.
+- **Backup Option:** Includes a Ruby on Rails backend as an optional backup for task management, ensuring data persistence and reliability.
+- **Manual Refresh:** Users can manually refresh the task list if they wish to ensure they have the latest data from the server.
 
 ### Statistics Visualization
 
@@ -142,6 +158,7 @@ I hope its name and branding convey a sense of connectivity and organization, wi
 - **Bar Chart:** Compares overdue and upcoming tasks with wider, closely spaced bars.
 - **Line Chart:** Plots tasks over time (by month), ensuring continuity even if only a single month is available.
 - **Transparent & Themed Charts:** All charts feature transparent backgrounds and adjust seamlessly to the current theme.
+- **Immediate Data Updates:** Charts update in real-time as tasks are added, completed, or deleted.
 
 ### Theme & UI
 
@@ -175,6 +192,14 @@ TaskNexus is built using a modern tech stack that includes both core and third-p
 - **React Native Reanimated:** Powers animations and transitions for a fluid user experience.
 - **React Native Safe Area:** Ensures proper layout and spacing on devices with notches or rounded corners.
 
+### **Backend & Data:**
+
+- **Supabase:** Provides real-time database, authentication, and storage services.
+- **PostgreSQL:** The underlying database for storing tasks and user data.
+- **Ruby on Rails (Optional):** A backup backend for task management, providing an alternative data persistence layer.
+- **Docker:** Containerization for the Ruby backend, allowing easy deployment and management.
+- **AWS:** Used for hosting the Ruby backend and managing cloud resources.
+
 ### **Third-Party Dependencies:**
 
 - **Expo:** Provides a robust development workflow and build process.
@@ -186,12 +211,15 @@ TaskNexus is built using a modern tech stack that includes both core and third-p
 - **React Native Draggable FlatList:** Enables drag-and-drop reordering of tasks.
 - **React Native DateTime Picker:** Provides a user-friendly date and time selection interface.
 - **Prettier:** Maintains code quality and consistent formatting.
+- **Docker:** Containerizes the React Native app for easier deployment and testing.
 
 ### **Other:**
 
+- **Jest & React Testing Library:** For unit and integration testing of components and functionality.
 - **JSDoc & TypeScript Definitions:** Documented code for better understanding and type safety.
 - **Google Fonts:** Includes custom Google fonts (Roboto) and images for branding.
 - **Shell Scripts:** Simplify common tasks with custom shell scripts.
+- **GitHub Actions:** CI/CD pipeline for automated testing and deployment.
 
 ## Installation & Setup
 
@@ -203,8 +231,18 @@ TaskNexus is built using a modern tech stack that includes both core and third-p
   ```bash
   npm install -g expo-cli
   ```
-- Android/iOS Emulator or Physical Device: For testing on mobile platforms.
+- **Android/iOS Emulator or Physical Device:** For testing on mobile platforms.
   - This is required for testing the app on Android/iOS devices. Alternatively, you can use the web version for a quick preview.
+- **Supabase Account:** For cloud synchronization and user authentication.
+  - Sign up for a free account at [Supabase](https://supabase.io/) and create a new project.
+  - Set up the PostgreSQL database and configure the necessary tables for tasks.
+  - Create a `.env` file in the root directory of the project with your Supabase credentials:
+    ```
+    EXPO_PUBLIC_SUPABASE_URL=your_supabase_url
+    EXPO_PUBLIC_SUPABASE_ANON_KEY=your_supabase_anon_key
+    ```
+- **Docker (Optional):** For containerization and running the app in a Docker environment.
+  - If you want to run the app in a Docker container, ensure that Docker is installed and running on your system.
 
 ### Clone the Repository
 
@@ -290,12 +328,21 @@ Task-Manager-ReactNative
 ├── .gitignore                     # Git ignore file
 ├── Dockerfile                     # Dockerfile for containerization
 ├── docker-compose.yml             # Docker Compose file for containerization
+├── jest.config.js                 # Jest configuration for testing
+├── babel.config.js                # Babel configuration for transpiling code
+├── jest.setup.js                  # Jest setup file for testing
+├── .env                           # Environment variables for Supabase credentials
+├── .github
+│   └── workflows
+│       └── ci.yml                 # GitHub Actions CI/CD workflow configuration
 ├── app
 │   ├── _layout.tsx                # Main layout with theme, navigation, and context providers
 │   ├── index.tsx                  # Flash screen and redirection to home screen
 │   ├── +not-found.tsx             # Custom Not Found screen for undefined routes
 │   └── (tabs)
 │       ├── _layout.tsx            # Layout for tabbed screens
+│       ├── register.tsx           # Registration screen for user authentication
+│       ├── login.tsx              # Login screen for user authentication
 │       ├── home.tsx               # Home screen for task management
 │       └── stats.tsx              # Stats screen for displaying charts and statistics
 ├── components
@@ -310,6 +357,8 @@ Task-Manager-ReactNative
 │   └── TaskContext.tsx            # React Context for global task state management
 ├── hooks
 │   └── usePrevious.ts             # Custom hook to capture previous state values
+├── lib
+│   └── supabaseClient.ts          # Supabase client configuration for database interactions
 ├── scripts
 │   └── reset-project.js           # Script to reset project state (if needed)
 ├── styles
@@ -317,15 +366,32 @@ Task-Manager-ReactNative
 │   ├── StatsScreenStyles.ts       # Custom styles for the Stats screen
 │   ├── IndexStyles.ts             # Custom styles for the Flash screen and redirection
 │   ├── LayoutStyles.ts            # Custom styles for the main layout
-│   ├── TaskModalStyles.ts      # Custom styles for the task add modal
+│   ├── TaskModalStyles.ts         # Custom styles for the task add modal
 │   ├── TaskItemStyles.ts          # Custom styles for individual task items
 │   ├── NotFoundStyles.ts          # Custom styles for the Not Found screen
 │   └── CustomTabStyles.ts         # Custom styles for the tab bar and related UI components
+├── ruby                           # Ruby backend for backup task management (optional)
+│   ├── Gemfile                    # Ruby dependencies for the backup Rails backend
+│   ├── app.rb                     # Main Ruby API application file
+│   ├── config.ru                  # Rack configuration file for the Ruby app
+│   ├── app/                       # Ruby app directory
+│   │   ├── controllers/           # Ruby app controllers directory
+│   │   ├── models/                # Ruby app models directory
+│   ├── config/                    # Ruby app configuration directory
+│   ├── initializers/              # Ruby app initializers directory
 ├── types
 │   └── types.ts                   # TypeScript type definitions for the project
 ├── assets
 │   ├── fonts                      # Custom fonts for the app (Roboto)
 │   └── images                     # Images used in the app
+├── aws                            # AWS configuration files
+│   ├── main.tf                    # Terraform configuration for AWS resources
+│   ├── variables.tf               # Variables for AWS configuration
+│   ├── outputs.tf                 # Outputs for AWS configuration
+│   └── lambda
+│       └── handler.js             # Lambda function handler for AWS
+├── __tests__                      # Test files for the project
+├── __mocks__                      # Mock files for testing
 ├── img                            # Screenshots and GIFs for the README
 └── shell                          # Shell scripts for common tasks
     ├── run-platform.sh            # Script to run the app on a specific platform
@@ -333,6 +399,8 @@ Task-Manager-ReactNative
     ├── start.sh                   # Script to start the app
     ├── reset.sh                   # Script to reset the project state
     └── update.sh                  # Script to update project dependencies
+
+(...and more files not listed here...)
 ```
 
 ## Scripts & Tools
@@ -358,11 +426,14 @@ Task-Manager-ReactNative
 
 This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for more details.
 
+> [!CAUTION]
+> This project is for educational purposes only and is not intended for production use. It is a personal project to demonstrate my skills in React Native, Expo, and TypeScript. Please be sure to credit the original author if you use any part of this code in your own projects, regardless of use case.
+
 ## Contact
 
 For any questions, feedback, or suggestions, please contact:
 
-- **Name:** Son Nguyen
+- **Name:** [Son Nguyen](https://sonnguyenhoang.com)
 - **Email:** [hoangson091104@gmail.com](mailto:hoangson091104@gmail.com)
 - **GitHub:** [@hoangsonww](https://github.com/hoangsonww)
 
