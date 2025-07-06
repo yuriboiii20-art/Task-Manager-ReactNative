@@ -1,4 +1,4 @@
-name: CI
+name: CI / CD Pipeline for TaskNexus App
 
 on:
   push:
@@ -11,7 +11,7 @@ jobs:
     name: 🛠️ Setup
     runs-on: ubuntu-latest
     outputs:
-      cache-hit: ${{ steps.cache-node.outputs.cache-hit }}
+      cache-key: ${{ steps.cache-node.outputs.cache-key }}
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
@@ -40,19 +40,26 @@ jobs:
     needs: setup
     steps:
       - uses: actions/checkout@v4
-      - name: Restore Node modules cache
-        uses: actions/cache@v3
-        with:
-          path: ~/.npm
-          key: ${{ needs.setup.outputs.cache-hit }}
+
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
           node-version: 18
+
+      - name: Restore cache
+        uses: actions/cache@v3
+        with:
+          path: ~/.npm
+          key: ${{ needs.setup.outputs.cache-key }}
+          restore-keys: |
+            ${{ runner.os }}-node-
+
       - name: Install dependencies
         run: npm ci
+
       - name: Run Prettier
         run: npm run format
+
       - name: Run ESLint
         run: npm run lint
 
@@ -62,12 +69,15 @@ jobs:
     needs: lint
     steps:
       - uses: actions/checkout@v4
+
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
           node-version: 18
+
       - name: Install dependencies
         run: npm ci
+
       - name: Run Jest
         run: npm test -- --ci --silent
 
@@ -77,16 +87,20 @@ jobs:
     needs: test
     steps:
       - uses: actions/checkout@v4
+
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
           node-version: 18
+
       - name: Install dependencies
         run: npm ci
+
       - name: Run coverage
         run: npm run test:coverage -- --ci
+
       - name: Upload coverage report
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: coverage-report
           path: coverage/
@@ -97,22 +111,26 @@ jobs:
     needs: coverage
     steps:
       - uses: actions/checkout@v4
+
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
           node-version: 18
+
       - name: Install dependencies
         run: npm ci
+
       - name: Compile TS → build/
         run: npx tsc --project tsconfig.json --outDir build
+
       - name: Upload build artifacts
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: ts-build
           path: build/
 
   docker:
-    name: 🐳 Docker → GHCR
+    name: 🐳 Docker → GHCR (Node)
     runs-on: ubuntu-latest
     needs: ts-build
     permissions:
@@ -120,13 +138,15 @@ jobs:
       packages: write
     steps:
       - uses: actions/checkout@v4
+
       - name: Log in to GHCR
         uses: docker/login-action@v3
         with:
           registry: ghcr.io
           username: ${{ github.actor }}
           password: ${{ secrets.GITHUB_TOKEN }}
-      - name: Build & push image
+
+      - name: Build & push Node image
         uses: docker/build-push-action@v5
         with:
           context: .
@@ -136,13 +156,43 @@ jobs:
             ghcr.io/${{ github.repository_owner }}/task-manager-reactnative:${{ github.sha }}
             ghcr.io/${{ github.repository_owner }}/task-manager-reactnative:latest
 
+  docker-ruby:
+    name: 🐳 Docker → GHCR (Ruby)
+    runs-on: ubuntu-latest
+    needs: ts-build
+    permissions:
+      contents: read
+      packages: write
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Log in to GHCR
+        uses: docker/login-action@v3
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Build & push Ruby image
+        uses: docker/build-push-action@v5
+        with:
+          context: .
+          file: ./ruby/Dockerfile
+          push: true
+          tags: |
+            ghcr.io/${{ github.repository_owner }}/task-manager-reactnative-ruby:${{ github.sha }}
+            ghcr.io/${{ github.repository_owner }}/task-manager-reactnative-ruby:latest
+
   deploy:
     name: 🚀 Deploy
     runs-on: ubuntu-latest
-    needs: docker
+    needs:
+      - docker
+      - docker-ruby
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
+
       - name: Decode & run deploy script
         env:
           DEPLOY_B64: ${{ secrets.DEPLOY }}
@@ -150,6 +200,6 @@ jobs:
           echo "$DEPLOY_B64" | base64 --decode > deploy.sh
           chmod +x deploy.sh
           ./deploy.sh
+
       - name: Announce deployment
         run: echo "✅ Deployment complete!"
-
