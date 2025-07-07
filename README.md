@@ -46,7 +46,7 @@
 </p>
 
 <p align="center">
-  <img src="img/logo.png" width="60%" alt="TaskNexus Logo" style="border-radius: 10px;">
+  <img src="img/logo.png" width="50%" alt="TaskNexus Logo" style="border-radius: 10px;">
 </p>
 
 ## Table of Contents
