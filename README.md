@@ -565,6 +565,7 @@ For any questions, feedback, or suggestions, please contact:
 - **Name:** [Son Nguyen](https://sonnguyenhoang.com)
 - **Email:** [hoangson091104@gmail.com](mailto:hoangson091104@gmail.com)
 - **GitHub:** [@hoangsonww](https://github.com/hoangsonww)
+- **LinkedIn:** [Son Nguyen](https://www.linkedin.com/in/hoangsonw/)
 
 ---
 
