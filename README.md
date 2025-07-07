@@ -553,7 +553,7 @@ This is useful during development to quickly see the results of changes without 
 
 ## License
 
-This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for more details.
+This project is licensed under the **MIT License**. See the [LICENSE](LICENSE) file for more details.
 
 > [!CAUTION]
 > This project is for educational purposes only and is not intended for production use. It is a personal project to demonstrate my skills in React Native, Expo, and TypeScript. Please be sure to credit the original author if you use any part of this code in your own projects, regardless of use case.
