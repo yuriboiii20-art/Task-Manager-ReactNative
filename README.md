@@ -150,6 +150,12 @@ I hope its name and branding convey a sense of connectivity and organization, wi
   <img src="img/android.gif" alt="Task Manager App - Android" width="47%" style="border-radius: 10px;">
 </p>
 
+### Realtime Synchronization Demo
+
+<p align="center">
+  <img src="img/sync.gif" alt="Task Manager App - Realtime Synchronization" width="48%" style="border-radius: 10px;">
+</p>
+
 > [!IMPORTANT]
 > The above GIFs and images may not fully represent the app's current state, as they were recorded during development. The app has since been updated with new features and improvements. Please clone the repository and run the app to see the latest version in action!
 
