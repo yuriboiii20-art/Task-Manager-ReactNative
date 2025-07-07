@@ -425,7 +425,7 @@ Task-Manager-ReactNative
 │   ├── TaskItemStyles.ts          # Custom styles for individual task items
 │   ├── NotFoundStyles.ts          # Custom styles for the Not Found screen
 │   └── CustomTabStyles.ts         # Custom styles for the tab bar and related UI components
-├── ruby                           # Ruby backend for backup task management (optional)
+├── ruby                           # Ruby backend for backup task management API
 │   ├── Gemfile                    # Ruby dependencies for the backup Rails backend
 │   ├── app.rb                     # Main Ruby API application file
 │   ├── config.ru                  # Rack configuration file for the Ruby app
