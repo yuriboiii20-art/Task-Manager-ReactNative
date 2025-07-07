@@ -1,4 +1,4 @@
-# TaskNexus - Task Manager React Native App 📱
+# TaskNexus - A Task Manager React Native App 📱
 
 **Time to get organized!** TaskNexus is a modern, cross-platform task management app built with React Native, Expo, and TypeScript. It allows users to efficiently manage their daily tasks with features like task addition, completion, deletion, drag-and-drop reordering, and interactive statistics visualization.
 
