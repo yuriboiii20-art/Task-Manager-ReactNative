@@ -1,4 +1,4 @@
-# TaskNexus - Task Manager React Native App 📱
+# TaskNexus - A Task Manager React Native App 📱
 
 **Time to get organized!** TaskNexus is a modern, cross-platform task management app built with React Native, Expo, and TypeScript. It allows users to efficiently manage their daily tasks with features like task addition, completion, deletion, drag-and-drop reordering, and interactive statistics visualization.
 
@@ -56,7 +56,8 @@
   - [iOS](#ios)
   - [Android](#android)
   - [Web](#web)
-  - [Screen Recordings (GIFs)](#screen-recordings-gifs)
+  - [Screen Recordings (GIF)](#screen-recordings-gif)
+  - [Realtime Synchronization Demo](#realtime-synchronization-demo)
 - [Features](#features)
 - [Technical Stack & Libraries](#technical-stack--libraries)
   - [Core Dependencies](#core-dependencies)
@@ -164,7 +165,7 @@ I hope its name and branding convey a sense of connectivity and organization, wi
 > The above GIFs and images may not fully represent the app's current state, as they were recorded during development. The app has since been updated with new features and improvements. Please clone the repository and run the app to see the latest version in action!
 
 > [!NOTE]
-> My apologies for the low quality of the GIFs - they were converted from high-resolution videos to reduce file size, which resulted in great losses of quality. The app looks much better in real life, especially on mobile devices!
+> My apologies for the low quality of the GIFs - they were converted from high-resolution videos to reduce file size, which resulted in huge losses of quality. The app looks much better in real life, especially on mobile devices!
 
 ## Features
 
@@ -425,7 +426,7 @@ Task-Manager-ReactNative
 │   ├── TaskItemStyles.ts          # Custom styles for individual task items
 │   ├── NotFoundStyles.ts          # Custom styles for the Not Found screen
 │   └── CustomTabStyles.ts         # Custom styles for the tab bar and related UI components
-├── ruby                           # Ruby backend for backup task management (optional)
+├── ruby                           # Ruby backend for backup task management API
 │   ├── Gemfile                    # Ruby dependencies for the backup Rails backend
 │   ├── app.rb                     # Main Ruby API application file
 │   ├── config.ru                  # Rack configuration file for the Ruby app
@@ -552,21 +553,22 @@ This is useful during development to quickly see the results of changes without 
 
 ## License
 
-This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for more details.
+This project is licensed under the **MIT License**. See the [LICENSE](LICENSE) file for more details.
 
 > [!CAUTION]
 > This project is for educational purposes only and is not intended for production use. It is a personal project to demonstrate my skills in React Native, Expo, and TypeScript. Please be sure to credit the original author if you use any part of this code in your own projects, regardless of use case.
 
 ## Contact
 
-For any questions, feedback, or suggestions, please contact:
+For any questions, feedback, or suggestions, please contact the repository owner:
 
 - **Name:** [Son Nguyen](https://sonnguyenhoang.com)
 - **Email:** [hoangson091104@gmail.com](mailto:hoangson091104@gmail.com)
 - **GitHub:** [@hoangsonww](https://github.com/hoangsonww)
+- **LinkedIn:** [Son Nguyen](https://www.linkedin.com/in/hoangsonw/)
 
 ---
 
-**Thank you for checking out TaskNexus - Task Manager React Native App! 🚀📲**
+**Thank you for checking out TaskNexus - A Task Manager React Native App! 🚀📲**. Please feel free to contribute, report issues, or suggest improvements. Your feedback is always welcome!
 
 **[🔝 Back to top](#tasknexus---task-manager-react-native-app-)**

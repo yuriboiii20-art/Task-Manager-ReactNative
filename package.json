@@ -12,6 +12,18 @@
   "bugs": {
     "url": "https://github.com/hoangsonww/Task-Manager-ReactNative/issues"
   },
+  "keywords": [
+    "react-native",
+    "expo",
+    "task-manager",
+    "productivity",
+    "mobile-app",
+    "todo-list",
+    "task-tracker",
+    "task-management",
+    "cross-platform",
+    "react-navigation"
+  ],
   "scripts": {
     "start": "expo start",
     "reset-project": "node ./scripts/reset-project.js",
@@ -77,5 +89,5 @@
     "react-test-renderer": "^18.3.1",
     "typescript": "^5.3.3"
   },
-  "private": true
+  "private": false
 }
