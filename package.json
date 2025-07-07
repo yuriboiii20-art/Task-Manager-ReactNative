@@ -17,7 +17,12 @@
     "expo",
     "task-manager",
     "productivity",
-    "mobile-app"
+    "mobile-app",
+    "todo-list",
+    "task-tracker",
+    "task-management",
+    "cross-platform",
+    "react-navigation"
   ],
   "scripts": {
     "start": "expo start",
