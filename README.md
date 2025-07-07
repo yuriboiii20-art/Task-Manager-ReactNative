@@ -56,7 +56,7 @@
   - [iOS](#ios)
   - [Android](#android)
   - [Web](#web)
-  - 
+  - [Screen Recordings (GIF)](#screen-recordings-gif)
 - [Features](#features)
 - [Technical Stack & Libraries](#technical-stack--libraries)
   - [Core Dependencies](#core-dependencies)
