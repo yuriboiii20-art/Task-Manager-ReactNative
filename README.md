@@ -16,10 +16,13 @@
   <!-- UI & Charts -->
   <img src="https://img.shields.io/badge/React_Native_Paper-6200EE?style=for-the-badge&logo=react&logoColor=white" alt="React Native Paper" />
   <img src="https://img.shields.io/badge/Chart_Kit-FF6384?style=for-the-badge&logo=chartdotjs&logoColor=white" alt="React Native Chart Kit" />
+  <img src="https://img.shields.io/badge/React_Router-orange?style=for-the-badge&logo=reactrouter&logoColor=white" alt="React Router" />
+  <img src="https://img.shields.io/badge/React_Native_Vector_Icons-purple?style=for-the-badge&logo=react&logoColor=white" alt="React Native Vector Icons" />
 
   <!-- Backend & Data -->
   <img src="https://img.shields.io/badge/Supabase-3ECF8E?style=for-the-badge&logo=supabase&logoColor=white" alt="Supabase" />
   <img src="https://img.shields.io/badge/PostgreSQL-336791?style=for-the-badge&logo=postgresql&logoColor=white" alt="PostgreSQL" />
+  <img src="https://img.shields.io/badge/WebSockets-4A90E2?style=for-the-badge&logo=socketdotio&logoColor=white" alt="WebSockets" />
 
   <!-- DevOps -->
   <img src="https://img.shields.io/badge/Docker-2496ED?style=for-the-badge&logo=docker&logoColor=white" alt="Docker" />
@@ -39,6 +42,7 @@
   <img src="https://img.shields.io/badge/Babel-FFCA28?style=for-the-badge&logo=babel&logoColor=white" alt="Babel" />
   <img src="https://img.shields.io/badge/Prettier-pink?style=for-the-badge&logo=prettier&logoColor=white" alt="Prettier" />
   <img src="https://img.shields.io/badge/ESLint-4B32C3?style=for-the-badge&logo=eslint&logoColor=white" alt="ESLint" />
+  <img src="https://img.shields.io/badge/Husky-7D4C8A?style=for-the-badge&logo=precommit&logoColor=white" alt="Husky" />
 </p>
 
 <p align="center">
@@ -143,15 +147,24 @@ I hope its name and branding convey a sense of connectivity and organization, wi
   <img src="img/RegisterWeb.png" width="48%" alt="Task Manager App - Web" style="border-radius: 10px;">
 </p>
 
-### Screen Recordings (GIFs)
+### Screen Recordings (GIF)
 
 <p align="center">
   <img src="img/ios.gif" alt="Task Manager App - iOS" width="48%" style="border-radius: 10px;">
   <img src="img/android.gif" alt="Task Manager App - Android" width="47%" style="border-radius: 10px;">
 </p>
 
+### Realtime Synchronization Demo
+
+<p align="center">
+  <img src="img/sync.gif" alt="Task Manager App - Realtime Synchronization" width="100%" style="border-radius: 10px;">
+</p>
+
 > [!IMPORTANT]
 > The above GIFs and images may not fully represent the app's current state, as they were recorded during development. The app has since been updated with new features and improvements. Please clone the repository and run the app to see the latest version in action!
+
+> [!NOTE]
+> My apologies for the low quality of the GIFs - they were converted from high-resolution videos to reduce file size, which resulted in great losses of quality. The app looks much better in real life, especially on mobile devices!
 
 ## Features
 
@@ -198,6 +211,8 @@ I hope its name and branding convey a sense of connectivity and organization, wi
 - **Splash Screen:** Custom splash screen with app name and slogan.
 - **Redirection:** Automatically redirects to the home screen after the splash screen (3 seconds).
 
+_...and many more features!_
+
 ## Technical Stack & Libraries
 
 TaskNexus is built using a modern tech stack that includes both core and third-party libraries to enhance functionality and user experience. Here are the key components:
@@ -231,15 +246,20 @@ TaskNexus is built using a modern tech stack that includes both core and third-p
 - **React Native Draggable FlatList:** Enables drag-and-drop reordering of tasks.
 - **React Native DateTime Picker:** Provides a user-friendly date and time selection interface.
 - **Prettier:** Maintains code quality and consistent formatting.
-- **Docker:** Containerizes the React Native app for easier deployment and testing.
+- **Husky:** Ensures code quality by running Prettier and ESLint before commits.
 
 ### **Other:**
 
+- **Docker:** Containerizes the React Native app for easier deployment and testing.
 - **Jest & React Testing Library:** For unit and integration testing of components and functionality.
 - **JSDoc & TypeScript Definitions:** Documented code for better understanding and type safety.
 - **Google Fonts:** Includes custom Google fonts (Roboto) and images for branding.
 - **Shell Scripts:** Simplify common tasks with custom shell scripts.
 - **GitHub Actions:** CI/CD pipeline for automated testing and deployment.
+- **Makefile:** Provides a simple interface for running common commands.
+- **Shell Scripts:** Includes various shell scripts for common tasks like starting the app, formatting code, and resetting the project state.
+- **Vercel:** Used for hosting the web version of the app, providing a fast and reliable deployment platform.
+- **GitHub Container Registry:** Hosts the Docker image for the app, allowing easy access and deployment.
 
 ## Installation & Setup
 
@@ -301,6 +321,7 @@ Alternatively, you can use the Expo CLI directly:
 npx expo start
 ```
 
+> [!TIP]
 > Note: You can also use the `-c` flag to clear the cache and start fresh if needed: `npx expo start -c`.
 
 Then:
@@ -308,7 +329,8 @@ Then:
 - Open the app on your device using the Expo Go app, or
 - Use an Android/iOS simulator (remember to press `a` or `i` in the terminal to open the app on Android/iOS, respectively, with the simulator/emulator running), or
 - Open the project in a web browser for a quick preview (remember to press `w` in the terminal, it will then open a new tab in your default browser).
-  > Note: The web version may not display correctly on larger screens. Also, some functionalities, like drag-and-drop, date picker, time picker, etc. may not work as expected on the web since they are designed for mobile devices.
+> [!IMPORTANT]
+> Note: The web version may not display correctly on larger screens. Also, some functionalities, like drag-and-drop, date picker, time picker, etc. may not work as expected on the web since they are designed for mobile devices.
 - Enjoy managing your tasks with TaskNexus! 🚀
 
 ## Usage Instructions
