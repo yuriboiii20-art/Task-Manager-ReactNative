@@ -153,7 +153,7 @@ I hope its name and branding convey a sense of connectivity and organization, wi
 ### Realtime Synchronization Demo
 
 <p align="center">
-  <img src="img/sync.gif" alt="Task Manager App - Realtime Synchronization" width="48%" style="border-radius: 10px;">
+  <img src="img/sync.gif" alt="Task Manager App - Realtime Synchronization" width="100%" style="border-radius: 10px;">
 </p>
 
 > [!IMPORTANT]
