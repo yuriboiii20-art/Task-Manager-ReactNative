@@ -12,6 +12,13 @@
   "bugs": {
     "url": "https://github.com/hoangsonww/Task-Manager-ReactNative/issues"
   },
+  "keywords": [
+    "react-native",
+    "expo",
+    "task-manager",
+    "productivity",
+    "mobile-app"
+  ],
   "scripts": {
     "start": "expo start",
     "reset-project": "node ./scripts/reset-project.js",
