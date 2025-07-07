@@ -57,6 +57,7 @@
   - [Android](#android)
   - [Web](#web)
   - [Screen Recordings (GIF)](#screen-recordings-gif)
+  - [Realtime Synchronization Demo](#realtime-synchronization-demo)
 - [Features](#features)
 - [Technical Stack & Libraries](#technical-stack--libraries)
   - [Core Dependencies](#core-dependencies)
