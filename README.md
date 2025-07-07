@@ -560,7 +560,7 @@ This project is licensed under the **MIT License**. See the [LICENSE](LICENSE) f
 
 ## Contact
 
-For any questions, feedback, or suggestions, please contact:
+For any questions, feedback, or suggestions, please contact the repository owner:
 
 - **Name:** [Son Nguyen](https://sonnguyenhoang.com)
 - **Email:** [hoangson091104@gmail.com](mailto:hoangson091104@gmail.com)
