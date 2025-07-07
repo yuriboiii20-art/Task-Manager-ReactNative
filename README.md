@@ -159,7 +159,8 @@ I hope its name and branding convey a sense of connectivity and organization, wi
 > [!IMPORTANT]
 > The above GIFs and images may not fully represent the app's current state, as they were recorded during development. The app has since been updated with new features and improvements. Please clone the repository and run the app to see the latest version in action!
 
-
+> [!NOTE]
+> My apologies for the low quality of the GIFs - they were converted from high-resolution videos to reduce file size, which resulted in great losses of quality. The app looks much better in real life, especially on mobile devices!
 
 ## Features
 
