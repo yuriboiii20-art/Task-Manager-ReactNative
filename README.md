@@ -143,7 +143,7 @@ I hope its name and branding convey a sense of connectivity and organization, wi
   <img src="img/RegisterWeb.png" width="48%" alt="Task Manager App - Web" style="border-radius: 10px;">
 </p>
 
-### Screen Recordings (GIFs)
+### Screen Recordings (GIF)
 
 <p align="center">
   <img src="img/ios.gif" alt="Task Manager App - iOS" width="48%" style="border-radius: 10px;">
@@ -158,6 +158,8 @@ I hope its name and branding convey a sense of connectivity and organization, wi
 
 > [!IMPORTANT]
 > The above GIFs and images may not fully represent the app's current state, as they were recorded during development. The app has since been updated with new features and improvements. Please clone the repository and run the app to see the latest version in action!
+
+
 
 ## Features
 
