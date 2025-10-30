@@ -128,7 +128,6 @@ export default function CustomTabBar(props: BottomTabBarProps) {
            <TouchableOpacity 
              onPress={handleLogout} 
              style={styles.tabButton} 
-             activeOpacity={0.8} 
            > 
              <Ionicons name="log-out" size={24} color={colors.onBackground} /> 
            </TouchableOpacity> 
