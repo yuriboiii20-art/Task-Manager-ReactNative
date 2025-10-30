@@ -138,7 +138,7 @@ function HomeScreen() {
       <Animated.View style={[styles.container, animatedStyle]}>
         <View style={styles.headerArea}>
           <Text style={[styles.heading, { color: colors.onBackground }]}>
-            TASK MANAGER
+            What' Next??
           </Text>
           <Text style={[styles.subheading, { color: colors.onBackground }]}>
             Good {getGreeting()}!

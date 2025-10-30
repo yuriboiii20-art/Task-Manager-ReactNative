@@ -19,7 +19,9 @@ export default function Index() {
 
   // Shared values for animations (only controlling opacity)
   const titleOpacity = useSharedValue(0);
+  
   const subtitleOpacity = useSharedValue(0);
+  
 
   // Animate the title and subtitle fade-in on mount
   useEffect(() => {
@@ -30,6 +32,7 @@ export default function Index() {
   // Animated style for title
   const titleAnimatedStyle = useAnimatedStyle(() => ({
     opacity: titleOpacity.value,
+   
   }));
 
   // Animated style for subtitle
@@ -41,7 +44,7 @@ export default function Index() {
   useEffect(() => {
     const timer = setTimeout(() => {
       setRedirect(true);
-    }, 3000);
+    }, 5000);
     return () => clearTimeout(timer);
   }, []);
 
@@ -53,12 +56,15 @@ export default function Index() {
   // Render the splash screen with title and subtitle of the app
   return (
     <View style={styles.container}>
+     
       <Animated.Text style={[styles.title, titleAnimatedStyle]}>
-        TaskNexus
+        My Orbii
       </Animated.Text>
       <Animated.Text style={[styles.subtitle, subtitleAnimatedStyle]}>
-        Stay Organized, Stay Ahead 🚀
+        it always starts with a plan 💡.
       </Animated.Text>
+      
     </View>
   );
 }
+

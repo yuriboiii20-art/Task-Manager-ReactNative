@@ -50,7 +50,7 @@ export default function RegisterScreen() {
         Register
       </Text>
       <Text style={[styles.subheading, { color: colors.onBackground }]}>
-        Create your free TaskNexus account
+        Create your free Orbii account
       </Text>
 
       {error && (

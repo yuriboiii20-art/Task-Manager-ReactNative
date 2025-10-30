@@ -44,7 +44,7 @@ export default function SignInScreen() {
         Sign In
       </Text>
       <Text style={[styles.subheading, { color: colors.onBackground }]}>
-        Welcome back to TaskNexus
+        Welcome back to my orbii....
       </Text>
 
       {error && (

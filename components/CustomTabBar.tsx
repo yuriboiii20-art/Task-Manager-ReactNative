@@ -125,13 +125,13 @@ export default function CustomTabBar(props: BottomTabBarProps) {
             <Ionicons name="reload" size={24} color={colors.onBackground} />
           </TouchableOpacity>
 
-          <TouchableOpacity
-            onPress={handleLogout}
-            style={styles.tabButton}
-            activeOpacity={0.8}
-          >
-            <Ionicons name="log-out" size={24} color={colors.onBackground} />
-          </TouchableOpacity>
+           <TouchableOpacity 
+             onPress={handleLogout} 
+             style={styles.tabButton} 
+             activeOpacity={0.8} 
+           > 
+             <Ionicons name="log-out" size={24} color={colors.onBackground} /> 
+           </TouchableOpacity> 
         </>
       ) : (
         // If not signed in: ALWAYS show sign-in and register
